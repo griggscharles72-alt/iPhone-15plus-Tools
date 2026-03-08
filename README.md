@@ -1,5 +1,3 @@
-:::writing{variant=“standard” id=“README-001”}
-
 Dr. iPhone — Linux ↔ iPhone Observability Stack
 
 Overview
@@ -93,6 +91,7 @@ Responsibilities
 Why This Script Comes Second
 
 A snapshot shows what exists.
+
 A watcher shows what changes over time.
 
 This script introduces:
@@ -258,7 +257,7 @@ Responsibilities
 	•	display system summary
 	•	provide safe subcommands
 	•	centralize artifact storage
-	•	expose core functions:
+	•	expose core functions
 
 doctor
 watch
@@ -275,23 +274,22 @@ This script transforms the repository from a set of utilities into a platform.
 
 Correct Build Order
 
-The scripts must be developed in the following order:
-
-1. dr_iphone.py
-2. iphone_signal_watch.py
-3. iphone_file_bridge.py
-4. iphone_app_inventory.py
-5. iphone_crash_and_syslog_lab.py
-6. iphone_pcap_lab.py
-7. iphone_notify_console.py
-8. iphone_dev_surface.py
-9. iphone_state_db.py
-10. iphone_operator_console.py
+Scripts must be developed in this order:
+	1.	dr_iphone.py
+	2.	iphone_signal_watch.py
+	3.	iphone_file_bridge.py
+	4.	iphone_app_inventory.py
+	5.	iphone_crash_and_syslog_lab.py
+	6.	iphone_pcap_lab.py
+	7.	iphone_notify_console.py
+	8.	iphone_dev_surface.py
+	9.	iphone_state_db.py
+	10.	iphone_operator_console.py
 
 The ordering matters because each layer relies on the previous ones.
 
 Examples:
-	•	device monitoring requires stable detection and trust
+	•	monitoring requires stable detection and trust
 	•	file bridging requires known device state
 	•	PCAP analysis benefits from app inventory and logs
 	•	the console should orchestrate tools that already exist
@@ -300,7 +298,7 @@ Examples:
 
 Minimal Useful Subset
 
-If only four scripts are implemented, prioritize these:
+If only four scripts are implemented, prioritize:
 
 dr_iphone.py
 iphone_signal_watch.py
@@ -379,16 +377,17 @@ Instrumentation before observability leads to unstable systems.
 Final Script Ladder
 
 The full repository ladder is:
-	1.	dr_iphone.py
-	2.	iphone_signal_watch.py
-	3.	iphone_file_bridge.py
-	4.	iphone_app_inventory.py
-	5.	iphone_crash_and_syslog_lab.py
-	6.	iphone_pcap_lab.py
-	7.	iphone_notify_console.py
-	8.	iphone_dev_surface.py
-	9.	iphone_state_db.py
-	10.	iphone_operator_console.py
+
+1  dr_iphone.py
+2  iphone_signal_watch.py
+3  iphone_file_bridge.py
+4  iphone_app_inventory.py
+5  iphone_crash_and_syslog_lab.py
+6  iphone_pcap_lab.py
+7  iphone_notify_console.py
+8  iphone_dev_surface.py
+9  iphone_state_db.py
+10 iphone_operator_console.py
 
 Final advanced system:
 
@@ -397,17 +396,169 @@ iphone_observatory.py
 
 ⸻
 
-Repository Philosophy
+Repository Structure
 
-This project is designed around several principles:
-	•	Python-first orchestration
-	•	minimal helper tool dependency
-	•	safe read-only defaults
-	•	reproducible diagnostics
-	•	layered system design
-	•	artifact-driven analysis
-	•	historical state tracking
+dr-iphone/
+├── README.md
+├── requirements.txt
+├── .gitignore
+│
+├── dr_iphone.py
+├── iphone_signal_watch.py
+├── iphone_file_bridge.py
+├── iphone_app_inventory.py
+├── iphone_crash_and_syslog_lab.py
+├── iphone_pcap_lab.py
+├── iphone_notify_console.py
+├── iphone_dev_surface.py
+├── iphone_state_db.py
+├── iphone_operator_console.py
+├── iphone_observatory.py
+│
+├── driphone_lib/
+│   ├── __init__.py
+│   ├── core.py
+│   ├── device.py
+│   ├── artifacts.py
+│   ├── state.py
+│   └── render.py
+│
+├── artifacts/
+├── state/
+└── docs/
+
+
+⸻
+
+Directory Roles
+
+artifacts/
+
+All scripts produce timestamped outputs in the artifacts directory.
+
+Each script writes results to its own subdirectory.
+
+Example:
+
+artifacts/dr_iphone/
+artifacts/iphone_signal_watch/
+artifacts/iphone_app_inventory/
+artifacts/iphone_pcap_lab/
+
+Artifacts are immutable outputs that allow later correlation and auditing.
+
+⸻
+
+state/
+
+The state directory stores persistent project data such as the SQLite database used by iphone_state_db.py.
+
+state/dr_iphone.db
+
+This database records historical results across runs.
+
+⸻
+
+docs/
+
+Optional documentation, research notes, and design references may be stored here.
+
+⸻
+
+Internal Library Layer
+
+As the repository grows, common functionality appears repeatedly across scripts:
+	•	logging
+	•	subprocess execution
+	•	device detection
+	•	artifact writing
+	•	timestamp helpers
+	•	JSON handling
+	•	latest artifact discovery
+
+To avoid duplication, these helpers are centralized into an internal library:
+
+driphone_lib/
+
+Library Components
+
+core.py
+
+Provides shared generic utilities:
+	•	logging helpers
+	•	timestamp helpers
+	•	command execution wrappers
+	•	command existence checks
+
+device.py
+
+Provides iPhone-specific helpers:
+	•	device detection
+	•	UDID discovery
+	•	device information retrieval
+
+artifacts.py
+
+Provides artifact management helpers:
+	•	timestamped output directories
+	•	JSON/text writing
+	•	latest artifact discovery
+
+state.py
+
+Provides SQLite helpers for persistent state storage.
+
+render.py
+
+Provides reusable report formatting helpers.
+
+⸻
+
+Why the Library Exists
+
+Without a shared library, every script duplicates the same helper functions.
+
+Centralizing shared functionality provides several advantages:
+	•	smaller script files
+	•	consistent behavior across scripts
+	•	easier refactoring
+	•	safer updates to core logic
+
+Top-level scripts should therefore remain focused on device logic, not infrastructure logic.
+
+⸻
+
+Future Extensions
+
+Once the observability stack is stable, additional features may be explored.
+
+Examples include:
+	•	long-running monitoring daemon
+	•	automated anomaly detection
+	•	richer network traffic classification
+	•	extended event correlation
+	•	instrumentation layers (e.g. Frida integration)
+
+These extensions should only be attempted after the base observability platform is stable.
+
+⸻
+
+Project Goal
+
+The long-term goal of this repository is not to build a collection of random device utilities.
+
+Instead, the goal is to create a structured observability platform for iPhone devices on Linux.
+
+The system should evolve from:
+
+manual command execution
+
+to:
+
+reproducible device intelligence
 
 Every script added to the repository should fit into this layered model.
 
 Scripts that do not fit the architecture should be treated as experiments rather than permanent components.
+
+:::

@@ -48,6 +48,7 @@ Managed scripts
     07 iphone_notify_console.py
     08 iphone_dev_surface.py
     09 iphone_state_db.py
+    11 iphone_observatory.py
 
 Outputs
 -------
@@ -107,6 +108,7 @@ MANAGED_SCRIPTS = [
     ("notify", "iphone_notify_console.py"),
     ("devsurf", "iphone_dev_surface.py"),
     ("state", "iphone_state_db.py"),
+    ("observatory", "iphone_observatory.py"),
 ]
 
 
@@ -313,6 +315,7 @@ def render_status_text(
     lines.append("Common commands")
     lines.append("-" * 72)
     lines.append("./iphone_operator_console.py status")
+    lines.append("./iphone_operator_console.py run observatory")
     lines.append("./iphone_operator_console.py run doctor")
     lines.append("./iphone_operator_console.py run apps")
     lines.append("./iphone_operator_console.py run crash")
@@ -399,6 +402,8 @@ def run_all_safe(root: Path) -> List[Dict[str, Any]]:
     """
     Conservative safe bundle:
       doctor -> apps -> crash -> devsurf -> state
+    Observatory is the preferred daily runner, but this bundle remains useful
+    as a lower-level conservative control path.
     Excludes watch/bridge/pcap/notify because those are more runtime-specific.
     """
     ordered_keys = ["doctor", "apps", "crash", "devsurf", "state"]
@@ -430,7 +435,7 @@ def parse_args() -> argparse.Namespace:
     sub.add_parser("run-all-safe", help="Run a conservative safe script bundle")
 
     run_p = sub.add_parser("run", help="Run a managed child script")
-    run_p.add_argument("script_key", help="doctor | watch | bridge | apps | crash | pcap | notify | devsurf | state")
+    run_p.add_argument("script_key", help="doctor | watch | bridge | apps | crash | pcap | notify | devsurf | state | observatory")
     run_p.add_argument(
         "script_args",
         nargs=argparse.REMAINDER,
@@ -565,6 +570,7 @@ if __name__ == "__main__":
 #   ./iphone_operator_console.py db-status
 #
 # Run one child script:
+#   ./iphone_operator_console.py run observatory
 #   ./iphone_operator_console.py run doctor
 #
 # Run one child script with extra args:

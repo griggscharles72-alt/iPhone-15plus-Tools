@@ -27,6 +27,23 @@ pymobiledevice3 exposes higher-level capabilities such as:
 
 The repository therefore builds a structured platform rather than isolated utilities.
 
+
+Daily Safe Workflow
+
+The primary default entrypoint is now:
+
+    iphone_observatory.py
+
+Recommended daily run:
+
+    ./iphone_observatory.py
+
+This performs a safe observability pass across the stable bench layers, then
+correlates the newest artifacts into one combined report.
+
+Use lower-level scripts directly only when working on a specific subsystem.
+
+
 ⸻
 
 Architecture
@@ -250,7 +267,7 @@ run tool → forget results
 
 10. iphone_operator_console.py
 
-Unified operator interface.
+Unified operator control surface.
 
 Responsibilities
 	•	call other modules
@@ -315,7 +332,7 @@ Even this subset forms a powerful platform.
 
 ⸻
 
-Advanced Goal: iphone_observatory.py
+11. iphone_observatory.py
 
 The most advanced system achievable with the base stack is:
 
@@ -323,7 +340,7 @@ iphone_observatory.py
 
 This script combines the capabilities of the earlier layers into a unified monitoring system.
 
-Observatory Responsibilities
+Primary Daily Runner Responsibilities
 	•	detect connected device
 	•	validate trust
 	•	poll battery and storage state

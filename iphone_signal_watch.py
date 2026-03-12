@@ -38,10 +38,6 @@ DEFAULT_SYSLOG_SECONDS = 3
 DEFAULT_DURATION = 60
 
 
-# ============================================================================
-# PATHS / TIME
-# ============================================================================
-
 def repo_root() -> Path:
     return Path(__file__).resolve().parent
 
@@ -64,10 +60,6 @@ def make_out_dir() -> Path:
     return out
 
 
-# ============================================================================
-# IO HELPERS
-# ============================================================================
-
 def log(msg: str) -> None:
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
 
@@ -85,10 +77,6 @@ def append_jsonl(path: Path, obj: dict[str, Any]) -> None:
 def write_json(path: Path, obj: dict[str, Any]) -> None:
     path.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-
-# ============================================================================
-# COMMAND HELPERS
-# ============================================================================
 
 def exists(cmd: str) -> bool:
     return shutil.which(cmd) is not None
@@ -132,10 +120,6 @@ def run(cmd: list[str], timeout: int = 20) -> dict[str, Any]:
         }
 
 
-# ============================================================================
-# DEVICE HELPERS
-# ============================================================================
-
 def get_devices() -> list[str]:
     if not exists("idevice_id"):
         return []
@@ -163,7 +147,6 @@ def battery_info(udid: str) -> dict[str, str]:
     result = run(["idevicediagnostics", "-u", udid, "battery"], timeout=20)
     if not result["ok"]:
         return {}
-
     data: dict[str, str] = {}
     for line in result["stdout"].splitlines():
         if ":" in line:
@@ -175,7 +158,6 @@ def battery_info(udid: str) -> dict[str, str]:
 def capture_syslog(udid: str, seconds: int = 3, line_cap: int = 200) -> list[str]:
     if not exists("idevicesyslog"):
         return []
-
     try:
         proc = subprocess.Popen(
             ["idevicesyslog", "-u", udid],
@@ -185,13 +167,11 @@ def capture_syslog(udid: str, seconds: int = 3, line_cap: int = 200) -> list[str
         )
         time.sleep(seconds)
         proc.terminate()
-
         try:
             out, _ = proc.communicate(timeout=3)
         except subprocess.TimeoutExpired:
             proc.kill()
             out, _ = proc.communicate()
-
         lines = [line.rstrip() for line in (out or "").splitlines()]
         return lines[:line_cap]
     except Exception:
@@ -230,15 +210,11 @@ def syslog_tags(lines: list[str]) -> dict[str, int]:
     return tags
 
 
-# ============================================================================
-# MAIN
-# ============================================================================
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Monitor iPhone live signals from Linux")
-    parser.add_argument("--duration", type=int, default=DEFAULT_DURATION, help="Total run duration in seconds")
-    parser.add_argument("--interval", type=int, default=DEFAULT_INTERVAL, help="Polling interval in seconds")
-    parser.add_argument("--syslog-seconds", type=int, default=DEFAULT_SYSLOG_SECONDS, help="Seconds per syslog sample")
+    parser.add_argument("--duration", type=int, default=60, help="Total run duration in seconds")
+    parser.add_argument("--interval", type=int, default=5, help="Polling interval in seconds")
+    parser.add_argument("--syslog-seconds", type=int, default=3, help="Seconds per syslog sample")
     return parser.parse_args()
 
 
@@ -307,8 +283,7 @@ def main() -> int:
                 if pairing.get("paired"):
                     summary["paired_validations"] += 1
 
-                msg = f"{now_iso()} device connected {udid}\n"
-                append_text(device_log, msg)
+                append_text(device_log, f"{now_iso()} device connected {udid}\n")
                 append_jsonl(timeline_jsonl, {
                     "ts": now_iso(),
                     "event": "device_connected",
@@ -383,17 +358,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-
-# ------------------------------------------------------------------------------
-# INSTRUCTIONS
-#
-# FILE NAME
-# iphone_signal_watch.py
-#
-# RUN FROM REPO ROOT
-# cd "$HOME/repos/dr-iphone" && . .venv/bin/activate && python3 iphone_signal_watch.py
-#
-# SHORT TEST
-# cd "$HOME/repos/dr-iphone" && . .venv/bin/activate && python3 iphone_signal_watch.py --duration 30 --interval 5 --syslog-seconds 2
-# ------------------------------------------------------------------------------

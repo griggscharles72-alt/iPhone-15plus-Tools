@@ -500,6 +500,10 @@ def main() -> int:
 
         safe_write_json(outdir / "child_runs.json", child_runs)
 
+        artifacts = artifact_status(root)
+        db = db_status(root)
+        udid = detect_device_udid()
+
     elif args.command == "run-all-safe":
         child_runs = run_all_safe(root)
         safe_write_json(outdir / "child_runs.json", child_runs)
@@ -515,6 +519,10 @@ def main() -> int:
                 f"rc={item.get('returncode')} "
                 f"t={item.get('duration_s')}"
             )
+
+        artifacts = artifact_status(root)
+        db = db_status(root)
+        udid = detect_device_udid()
 
     summary = {
         "timestamp": now_iso(),

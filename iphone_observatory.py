@@ -260,6 +260,7 @@ def run_child_script(root: Path, filename: str, extra_args: Optional[List[str]] 
         }
 
 
+
 # ============================================================================
 # CORRELATION
 # ============================================================================
@@ -381,7 +382,7 @@ def load_state(root: Path) -> Dict[str, Any]:
     }
 
 
-def build_observatory_summary(root: Path, child_runs: List[Dict[str, Any]]) -> Dict[str, Any]:
+def build_observatory_summary(root: Path, child_runs: List[Dict[str, Any]], run_plan: List[tuple[str, str]]) -> Dict[str, Any]:
     doctor = load_doctor(root)
     apps = load_apps(root)
     crash = load_crash(root)
@@ -391,6 +392,8 @@ def build_observatory_summary(root: Path, child_runs: List[Dict[str, Any]]) -> D
     state = load_state(root)
 
     anomaly_flags: List[str] = []
+    warnings: List[str] = []
+    child_failures = [r for r in child_runs if not r.get("ok")]
 
     if crash.get("present") and crash.get("crash_hits", 0) > 0:
         anomaly_flags.append(f"crash_hits={crash['crash_hits']}")
@@ -403,13 +406,31 @@ def build_observatory_summary(root: Path, child_runs: List[Dict[str, Any]]) -> D
 
     if pcap.get("present") and pcap.get("endpoint_candidates", 0) > 0:
         anomaly_flags.append(f"pcap_endpoints={pcap['endpoint_candidates']}")
+    elif pcap.get("present") and pcap.get("line_count", 0) == 0:
+        warnings.append("pcap_present_but_no_packets")
 
     if notify.get("present") and notify.get("event_count", 0) > 0:
         anomaly_flags.append(f"notify_events={notify['event_count']}")
+    elif notify.get("present") and notify.get("event_count", 0) == 0:
+        warnings.append("notify_present_but_no_events")
 
-    child_failures = [r for r in child_runs if not r.get("ok")]
+    if devsurf.get("present") and devsurf.get("unreachable_surfaces", 0) > 0:
+        warnings.append(f"devsurf_unreachable={devsurf['unreachable_surfaces']}")
+
     if child_failures:
         anomaly_flags.append(f"child_failures={len(child_failures)}")
+
+    observatory_score = {
+        "has_doctor": int(bool(doctor.get("present"))),
+        "has_apps": int(bool(apps.get("present"))),
+        "has_crash": int(bool(crash.get("present"))),
+        "has_pcap": int(bool(pcap.get("present"))),
+        "has_notify": int(bool(notify.get("present"))),
+        "has_devsurf": int(bool(devsurf.get("present"))),
+        "has_state": int(bool(state.get("present"))),
+    }
+
+    score_total = sum(observatory_score.values())
 
     return {
         "timestamp": now_iso(),
@@ -417,6 +438,7 @@ def build_observatory_summary(root: Path, child_runs: List[Dict[str, Any]]) -> D
         "app": APP_NAME,
         "stage": STAGE_NAME,
         "device_udid_detected": detect_device_udid() or "",
+        "run_plan": [{"key": key, "filename": filename} for key, filename in run_plan],
         "doctor": doctor,
         "apps": apps,
         "crash": crash,
@@ -424,20 +446,33 @@ def build_observatory_summary(root: Path, child_runs: List[Dict[str, Any]]) -> D
         "notify": notify,
         "devsurf": devsurf,
         "state": state,
+        "artifact_paths": {
+            "doctor": doctor.get("path", ""),
+            "apps": apps.get("path", ""),
+            "crash": crash.get("path", ""),
+            "pcap": pcap.get("path", ""),
+            "notify": notify.get("path", ""),
+            "devsurf": devsurf.get("path", ""),
+            "state": state.get("path", ""),
+        },
         "child_runs": {
             "count": len(child_runs),
             "failures": len(child_failures),
+            "details": [
+                {
+                    "key": r.get("key", ""),
+                    "filename": r.get("filename", ""),
+                    "ok": bool(r.get("ok")),
+                    "returncode": r.get("returncode"),
+                    "duration_s": r.get("duration_s", 0),
+                }
+                for r in child_runs
+            ],
         },
         "anomaly_flags": anomaly_flags,
-        "observatory_score": {
-            "has_doctor": int(bool(doctor.get("present"))),
-            "has_apps": int(bool(apps.get("present"))),
-            "has_crash": int(bool(crash.get("present"))),
-            "has_pcap": int(bool(pcap.get("present"))),
-            "has_notify": int(bool(notify.get("present"))),
-            "has_devsurf": int(bool(devsurf.get("present"))),
-            "has_state": int(bool(state.get("present"))),
-        },
+        "warnings": warnings,
+        "observatory_score": observatory_score,
+        "observatory_score_total": score_total,
     }
 
 
@@ -449,16 +484,30 @@ def render_observatory_report(summary: Dict[str, Any]) -> str:
     lines.append(f"Device UDID detected: {summary.get('device_udid_detected') or '<none>'}")
     lines.append("")
 
+    lines.append("Run plan")
+    lines.append("-" * 72)
+    for item in summary.get("run_plan", []):
+        lines.append(f"{item.get('key',''):8} {item.get('filename','')}")
+    lines.append("")
+
+    lines.append("Child run results")
+    lines.append("-" * 72)
+    for item in summary.get("child_runs", {}).get("details", []):
+        status = "OK" if item.get("ok") else "FAIL"
+        lines.append(f"{status:4} {item.get('key',''):8} rc={item.get('returncode')} t={item.get('duration_s')}")
+    lines.append("")
+
     doctor = summary.get("doctor", {})
     lines.append("Doctor")
     lines.append("-" * 72)
     if doctor.get("present"):
         first = doctor.get("first_device", {})
-        lines.append(f"name:            {first.get('name','')}")
-        lines.append(f"product_type:    {first.get('product_type','')}")
-        lines.append(f"ios_version:     {first.get('ios_version','')}")
-        lines.append(f"build_version:   {first.get('build_version','')}")
-        lines.append(f"battery_capacity:{first.get('battery_capacity','')}")
+        lines.append(f"name:             {first.get('name','')}")
+        lines.append(f"product_type:     {first.get('product_type','')}")
+        lines.append(f"ios_version:      {first.get('ios_version','')}")
+        lines.append(f"build_version:    {first.get('build_version','')}")
+        lines.append(f"battery_capacity: {first.get('battery_capacity','')}")
+        lines.append(f"artifact:         {doctor.get('path','')}")
     else:
         lines.append("not present")
     lines.append("")
@@ -467,9 +516,10 @@ def render_observatory_report(summary: Dict[str, Any]) -> str:
     lines.append("App inventory")
     lines.append("-" * 72)
     if apps.get("present"):
-        lines.append(f"apps_total:      {apps.get('apps_total',0)}")
-        lines.append(f"apps_added:      {apps.get('apps_added_count',0)}")
-        lines.append(f"apps_removed:    {apps.get('apps_removed_count',0)}")
+        lines.append(f"apps_total:       {apps.get('apps_total',0)}")
+        lines.append(f"apps_added:       {apps.get('apps_added_count',0)}")
+        lines.append(f"apps_removed:     {apps.get('apps_removed_count',0)}")
+        lines.append(f"artifact:         {apps.get('path','')}")
     else:
         lines.append("not present")
     lines.append("")
@@ -478,9 +528,10 @@ def render_observatory_report(summary: Dict[str, Any]) -> str:
     lines.append("Crash / syslog")
     lines.append("-" * 72)
     if crash.get("present"):
-        lines.append(f"syslog_lines:    {crash.get('syslog_lines',0)}")
-        lines.append(f"crash_hits:      {crash.get('crash_hits',0)}")
-        lines.append(f"apps_detected:   {crash.get('apps_detected',0)}")
+        lines.append(f"syslog_lines:     {crash.get('syslog_lines',0)}")
+        lines.append(f"crash_hits:       {crash.get('crash_hits',0)}")
+        lines.append(f"apps_detected:    {crash.get('apps_detected',0)}")
+        lines.append(f"artifact:         {crash.get('path','')}")
     else:
         lines.append("not present")
     lines.append("")
@@ -489,10 +540,11 @@ def render_observatory_report(summary: Dict[str, Any]) -> str:
     lines.append("PCAP")
     lines.append("-" * 72)
     if pcap.get("present"):
-        lines.append(f"line_count:      {pcap.get('line_count',0)}")
-        lines.append(f"dns_candidates:  {pcap.get('dns_candidates',0)}")
-        lines.append(f"endpoints:       {pcap.get('endpoint_candidates',0)}")
-        lines.append(f"protocols:       {pcap.get('protocol_candidates',0)}")
+        lines.append(f"line_count:       {pcap.get('line_count',0)}")
+        lines.append(f"dns_candidates:   {pcap.get('dns_candidates',0)}")
+        lines.append(f"endpoints:        {pcap.get('endpoint_candidates',0)}")
+        lines.append(f"protocols:        {pcap.get('protocol_candidates',0)}")
+        lines.append(f"artifact:         {pcap.get('path','')}")
     else:
         lines.append("not present")
     lines.append("")
@@ -501,9 +553,10 @@ def render_observatory_report(summary: Dict[str, Any]) -> str:
     lines.append("Notify")
     lines.append("-" * 72)
     if notify.get("present"):
-        lines.append(f"event_count:     {notify.get('event_count',0)}")
-        lines.append(f"keyword_count:   {notify.get('keyword_count',0)}")
-        lines.append(f"bundle_count:    {notify.get('bundle_count',0)}")
+        lines.append(f"event_count:      {notify.get('event_count',0)}")
+        lines.append(f"keyword_count:    {notify.get('keyword_count',0)}")
+        lines.append(f"bundle_count:     {notify.get('bundle_count',0)}")
+        lines.append(f"artifact:         {notify.get('path','')}")
     else:
         lines.append("not present")
     lines.append("")
@@ -512,8 +565,21 @@ def render_observatory_report(summary: Dict[str, Any]) -> str:
     lines.append("Developer surface")
     lines.append("-" * 72)
     if devsurf.get("present"):
-        lines.append(f"reachable:       {devsurf.get('reachable_surfaces',0)}")
-        lines.append(f"unreachable:     {devsurf.get('unreachable_surfaces',0)}")
+        lines.append(f"reachable:        {devsurf.get('reachable_surfaces',0)}")
+        lines.append(f"unreachable:      {devsurf.get('unreachable_surfaces',0)}")
+        lines.append(f"artifact:         {devsurf.get('path','')}")
+    else:
+        lines.append("not present")
+    lines.append("")
+
+    state = summary.get("state", {})
+    lines.append("State DB import")
+    lines.append("-" * 72)
+    if state.get("present"):
+        lines.append(f"artifact:         {state.get('path','')}")
+        imports = state.get("imports", {})
+        for key in sorted(imports):
+            lines.append(f"{key:18} {imports[key]}")
     else:
         lines.append("not present")
     lines.append("")
@@ -528,10 +594,21 @@ def render_observatory_report(summary: Dict[str, Any]) -> str:
         lines.append("none")
     lines.append("")
 
+    lines.append("Warnings")
+    lines.append("-" * 72)
+    warns = summary.get("warnings", [])
+    if warns:
+        for w in warns:
+            lines.append(w)
+    else:
+        lines.append("none")
+    lines.append("")
+
     lines.append("Observatory score")
     lines.append("-" * 72)
     for key, value in summary.get("observatory_score", {}).items():
         lines.append(f"{key:15} {value}")
+    lines.append(f"{'score_total':15} {summary.get('observatory_score_total', 0)}")
     lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
@@ -539,6 +616,7 @@ def render_observatory_report(summary: Dict[str, Any]) -> str:
 
 # ============================================================================
 # MAIN
+
 # ============================================================================
 
 def parse_args() -> argparse.Namespace:
@@ -586,7 +664,7 @@ def main() -> int:
         result["key"] = key
         child_runs.append(result)
 
-    summary = build_observatory_summary(root, child_runs)
+    summary = build_observatory_summary(root, child_runs, run_plan)
     report_text = render_observatory_report(summary)
 
     notes = [

@@ -1,0 +1,459 @@
+{
+  "environment": {
+    "timestamp": "2026-03-11T22:40:10",
+    "script": "dr_iphone.py",
+    "app": "Dr. iPhone",
+    "cwd": "/home/pc-10/repos/dr-iphone",
+    "script_root": "/home/pc-10/repos/dr-iphone",
+    "python_executable": "/home/pc-10/repos/dr-iphone/.venv/bin/python3",
+    "python_version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-14-generic-x86_64-with-glibc2.39",
+    "system": "Linux",
+    "release": "6.17.0-14-generic",
+    "machine": "x86_64",
+    "user": "pc-10"
+  },
+  "tools": {
+    "python3": {
+      "present": true,
+      "which": "/home/pc-10/repos/dr-iphone/.venv/bin/python3",
+      "version": "3.12.3"
+    },
+    "idevice_id": {
+      "present": true,
+      "which": "/usr/bin/idevice_id",
+      "version_check": {
+        "present": true,
+        "version": "idevice_id 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "idevice_id",
+            "--version"
+          ],
+          "stdout": "idevice_id 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.001
+        }
+      }
+    },
+    "ideviceinfo": {
+      "present": true,
+      "which": "/usr/bin/ideviceinfo",
+      "version_check": {
+        "present": true,
+        "version": "ideviceinfo 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "ideviceinfo",
+            "--version"
+          ],
+          "stdout": "ideviceinfo 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.001
+        }
+      }
+    },
+    "idevicepair": {
+      "present": true,
+      "which": "/usr/bin/idevicepair",
+      "version_check": {
+        "present": true,
+        "version": "idevicepair 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "idevicepair",
+            "--version"
+          ],
+          "stdout": "idevicepair 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.001
+        }
+      }
+    },
+    "idevicediagnostics": {
+      "present": true,
+      "which": "/usr/bin/idevicediagnostics",
+      "version_check": {
+        "present": true,
+        "version": "idevicediagnostics 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "idevicediagnostics",
+            "--version"
+          ],
+          "stdout": "idevicediagnostics 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.001
+        }
+      }
+    },
+    "idevicesyslog": {
+      "present": true,
+      "which": "/usr/bin/idevicesyslog",
+      "version_check": {
+        "present": true,
+        "version": "idevicesyslog 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "idevicesyslog",
+            "--version"
+          ],
+          "stdout": "idevicesyslog 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.001
+        }
+      }
+    },
+    "ifuse": {
+      "present": true,
+      "which": "/usr/bin/ifuse",
+      "version_check": {
+        "present": true,
+        "version": "ifuse 1.1.3",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "ifuse",
+            "--version"
+          ],
+          "stdout": "",
+          "stderr": "ifuse 1.1.3\n",
+          "duration_s": 0.001
+        }
+      }
+    },
+    "usbmuxd": {
+      "present": true,
+      "which": "/usr/sbin/usbmuxd",
+      "version_check": {
+        "present": true,
+        "version": "usbmuxd 1.1.1",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "usbmuxd",
+            "--version"
+          ],
+          "stdout": "usbmuxd 1.1.1\n",
+          "stderr": "",
+          "duration_s": 0.001
+        }
+      }
+    },
+    "pymobiledevice3_cli": {
+      "present": true,
+      "which": "/home/pc-10/repos/dr-iphone/.venv/bin/pymobiledevice3",
+      "version_check": {
+        "ok": true,
+        "returncode": 0,
+        "cmd": [
+          "pymobiledevice3",
+          "version"
+        ],
+        "stdout": "9.0.0\n",
+        "stderr": "",
+        "duration_s": 0.435
+      }
+    },
+    "pymobiledevice3_module": {
+      "present": true,
+      "version": "9.0.0",
+      "raw": {
+        "ok": true,
+        "returncode": 0,
+        "cmd": [
+          "/home/pc-10/repos/dr-iphone/.venv/bin/python3",
+          "-c",
+          "import importlib.metadata as m; print(m.version('pymobiledevice3'))"
+        ],
+        "stdout": "9.0.0\n",
+        "stderr": "",
+        "duration_s": 0.052
+      }
+    }
+  },
+  "usbmuxd": {
+    "socket_exists": true,
+    "socket_path_candidates": [
+      "/var/run/usbmuxd",
+      "/run/usbmuxd"
+    ],
+    "systemctl": {
+      "present": true,
+      "active": "active",
+      "enabled": "static",
+      "raw": {
+        "active": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "systemctl",
+            "is-active",
+            "usbmuxd.service"
+          ],
+          "stdout": "active\n",
+          "stderr": "",
+          "duration_s": 0.003
+        },
+        "enabled": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "systemctl",
+            "is-enabled",
+            "usbmuxd.service"
+          ],
+          "stdout": "static\n",
+          "stderr": "",
+          "duration_s": 0.005
+        }
+      }
+    },
+    "ps_grep": {
+      "ok": true,
+      "returncode": 0,
+      "cmd": [
+        "pgrep",
+        "-a",
+        "usbmuxd"
+      ],
+      "stdout": "63475 /usr/sbin/usbmuxd --user usbmux --systemd\n",
+      "stderr": "",
+      "duration_s": 0.019
+    }
+  },
+  "discovery": {
+    "idevice_id": {
+      "ok": true,
+      "returncode": 0,
+      "cmd": [
+        "idevice_id",
+        "-l"
+      ],
+      "stdout": "00008120-00040D990E2A601E\n",
+      "stderr": "",
+      "duration_s": 0.002
+    },
+    "udids": [
+      "00008120-00040D990E2A601E"
+    ],
+    "pymobiledevice3_usbmux_list": {
+      "ok": true,
+      "returncode": 0,
+      "cmd": [
+        "pymobiledevice3",
+        "usbmux",
+        "list"
+      ],
+      "stdout": "[\n    {\n        \"BuildVersion\": \"23B85\",\n        \"ConnectionType\": \"USB\",\n        \"DeviceClass\": \"iPhone\",\n        \"DeviceName\": \"iPhone\",\n        \"Identifier\": \"00008120-00040D990E2A601E\",\n        \"ProductType\": \"iPhone15,5\",\n        \"ProductVersion\": \"26.1\",\n        \"UniqueDeviceID\": \"00008120-00040D990E2A601E\"\n    }\n]\n",
+      "stderr": "",
+      "duration_s": 0.521
+    }
+  },
+  "devices": [
+    {
+      "udid": "00008120-00040D990E2A601E",
+      "pair_validate": {
+        "ok": true,
+        "returncode": 0,
+        "cmd": [
+          "idevicepair",
+          "-u",
+          "00008120-00040D990E2A601E",
+          "validate"
+        ],
+        "stdout": "SUCCESS: Validated pairing with device 00008120-00040D990E2A601E\n",
+        "stderr": "",
+        "duration_s": 0.215
+      },
+      "device_info": {
+        "ActivationState": "Activated",
+        "ActivationStateAcknowledged": "true",
+        "BasebandActivationTicketVersion": "V2",
+        "BasebandCertId": "3452763205",
+        "BasebandChipID": "2089185",
+        "BasebandKeyHashInformation": "AKeyStatus: 2",
+        "SKeyHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "SKeyStatus": "0",
+        "BasebandMasterKeyHash": "1B41607650EBF11C6B39F41CB267DC64C121A9BCF44DBA5D28F55ACC86361BBA366554CD57B4C466055803E1EF81C870",
+        "BasebandRegionSKU": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "BasebandSerialNumber": "2GD9sw==",
+        "BasebandStatus": "BBInfoAvailable",
+        "BasebandVersion": "3.10.04",
+        "BluetoothAddress": "1c:e2:09:59:e4:37",
+        "BoardId": "10",
+        "BootSessionID": "E7A8933C-63C5-4850-979B-1AF32A086C62",
+        "BootstrapVersion": "V1",
+        "BrickState": "false",
+        "BuildVersion": "23B85",
+        "CPUArchitecture": "arm64e",
+        "CarrierBundleInfoArray[1]": "",
+        "0": "1",
+        "CFBundleVersion": "66.0",
+        "GID1": "544d",
+        "IntegratedCircuitCardIdentity": "8901260518765176919",
+        "InternationalMobileSubscriberIdentity": "310260516517691",
+        "MCC": "310",
+        "MNC": "260",
+        "SIMGID1": "VE0=",
+        "Slot": "kOne",
+        "kCTPostponementInfoAvailable": "SIMCarrierInfo",
+        "CertID": "3452763205",
+        "ChipID": "33056",
+        "ChipSerialNo": "2GD9sw==",
+        "DeviceClass": "iPhone",
+        "DeviceColor": "1",
+        "DeviceName": "iPhone",
+        "DieID": "1140850925658142",
+        "EthernetAddress": "1c:e2:09:5b:10:a3",
+        "FirmwareVersion": "iBoot-13822.42.2",
+        "FusingStatus": "3",
+        "HardwareModel": "D38AP",
+        "HardwarePlatform": "t8120",
+        "HasSiDP": "true",
+        "HostAttached": "true",
+        "HumanReadableProductVersionString": "26.1",
+        "InternationalMobileEquipmentIdentity": "355278903935966",
+        "InternationalMobileEquipmentIdentity2": "355278903675471",
+        "InternationalMobileSubscriberIdentityOverride": "false",
+        "MLBSerialNumber": "C7HH91002HB00004CA",
+        "MobileSubscriberCountryCode": "310",
+        "MobileSubscriberNetworkCode": "260",
+        "ModelNumber": "MTXR3",
+        "NonVolatileRAM": "StartupMute: MQ==",
+        "SystemAudioVolumeExtension": "SCA=",
+        "alpm-24h-mode": "MA==",
+        "alpm-dst-offset": "LTM2MDA=",
+        "alpm-language-direction": "MQ==",
+        "alpm-next-dst": "MTc5MzUxMjgwMA==",
+        "alpm-number-system": "bGF0bg==",
+        "auto-boot": "dHJ1ZQ==",
+        "backlight-level": "NDU2",
+        "backlight-nits": "MHgwMDUwMDAwMA==",
+        "bootdelay": "MA==",
+        "fm-account-masked": "Y+KAouKAouKAouKAouKAokBpY2xvdWQuY29t",
+        "fm-activation-locked": "WUVT",
+        "fm-spkeys": "YnBsaXN0MDDWAQIDBAUGBwgJCgsUUWxRcFFzUWJRdlFpTxAQYtrMMW6oSxqieZcWAzt3gE8QOQQ6bEJq0MSxrjehk+j/i4q6qsY+I6Da2bnhXbip+0kYRwi4e8RnO0wuDBWab1ZKPCk8L/5wV9+E/k8QIPjOFSkGTS07phL/Tsk19z3gSyenbGRjKR0/jN0DwCoBM0HG6jeYFdjx0gwNDhNRMlEx0g8QERJRbFFzEAAQYNIQDxIREAEIFRcZGx0fITRwk5yho6WqrK6wsrcAAAAAAAABAQAAAAAAAAAVAAAAAAAAAAAAAAAAAAAAuQ==",
+        "fm-spstatus": "WUVT",
+        "obliteration": "RUFDUyBEb25lIEAxNzQ3MTg5NDk4LCBDYWxsZXI6IE4vQSwgUmVhc29uOiBEaXNlbWJhcmsgW2dGOiAweDAwMDAwMDAwMDAwMDAwMDBd",
+        "usbc,version,rid0": "AIUgABUA",
+        "utc-offset": "LTE0NDAw",
+        "PRIVersion_Major": "5",
+        "PRIVersion_Minor": "0",
+        "PRIVersion_ReleaseNo": "161",
+        "PairRecordProtectionClass": "4",
+        "PartitionType": "GUID_partition_scheme",
+        "PasswordProtected": "false",
+        "PhoneNumber": "+1 (304) 657-1689",
+        "PkHash": "zcz8RYO/13J/v/fhzLcrXlobwVOI7uLOmi/2DTa3zDQcOqMWm9mW0EeRkiWZTi+t",
+        "ProductName": "iPhone OS",
+        "ProductType": "iPhone15,5",
+        "ProductVersion": "26.1",
+        "ProductionSOC": "true",
+        "ProtocolVersion": "2",
+        "RegionInfo": "LL/A",
+        "SIM1IsBootstrap": "false",
+        "SIM1IsEmbedded": "true",
+        "SIMStatus": "kCTSIMSupportSIMStatusReady",
+        "SIMTrayStatus": "kCTSIMSupportSIMTrayAbsent",
+        "SerialNumber": "KQ3129R0HX",
+        "SoftwareBehavior": "EQAAAAAAAAAAAAAAAAAAAA==",
+        "SoftwareBundleVersion": "",
+        "SupportedDeviceFamilies[1]": "",
+        "TelephonyCapability": "true",
+        "TimeIntervalSince1970": "1773283212.1918809",
+        "TimeZone": "America/New_York",
+        "TimeZoneOffsetFromUTC": "-14400",
+        "TrustedHostAttached": "true",
+        "UniqueChipID": "1140850925658142",
+        "UniqueDeviceID": "00008120-00040D990E2A601E",
+        "UseRaptorCerts": "true",
+        "Uses24HourClock": "false",
+        "WiFiAddress": "1c:e2:09:62:82:b9",
+        "WirelessBoardSerialNumber": "1B1C1000FC34",
+        "kCTPostponementInfoPRIVersion": "5.0.161",
+        "kCTPostponementInfoServiceProvisioningState": "true",
+        "kCTPostponementStatus": "kCTPostponementStatusActivated"
+      },
+      "selected_info": {
+        "DeviceName": "iPhone",
+        "ProductType": "iPhone15,5",
+        "ProductVersion": "26.1",
+        "BuildVersion": "23B85",
+        "CPUArchitecture": "arm64e",
+        "UniqueDeviceID": "00008120-00040D990E2A601E",
+        "UniqueChipID": "1140850925658142",
+        "SerialNumber": "KQ3129R0HX",
+        "WiFiAddress": "1c:e2:09:62:82:b9",
+        "BluetoothAddress": "1c:e2:09:59:e4:37",
+        "PhoneNumber": "+1 (304) 657-1689",
+        "InternationalMobileEquipmentIdentity": "355278903935966",
+        "ModelNumber": "MTXR3",
+        "TimeZone": "America/New_York",
+        "RegionInfo": "LL/A"
+      },
+      "battery_info": {
+        "Usage": "idevicediagnostics [OPTIONS] COMMAND",
+        "Where COMMAND is one of": "",
+        "The following OPTIONS are accepted": "",
+        "Homepage": "<https://libimobiledevice.org>",
+        "Bug Reports": "<https://github.com/libimobiledevice/libimobiledevice/issues>"
+      },
+      "storage_snapshot": {},
+      "name_query": {
+        "ok": true,
+        "returncode": 0,
+        "cmd": [
+          "ideviceinfo",
+          "-u",
+          "00008120-00040D990E2A601E",
+          "-k",
+          "DeviceName"
+        ],
+        "stdout": "iPhone\n",
+        "stderr": "",
+        "duration_s": 0.215
+      },
+      "device_info_raw": {
+        "ok": true,
+        "returncode": 0,
+        "cmd": [
+          "ideviceinfo",
+          "-u",
+          "00008120-00040D990E2A601E"
+        ],
+        "stdout": "ActivationState: Activated\nActivationStateAcknowledged: true\nBasebandActivationTicketVersion: V2\nBasebandCertId: 3452763205\nBasebandChipID: 2089185\nBasebandKeyHashInformation: AKeyStatus: 2\n SKeyHash: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\n SKeyStatus: 0\nBasebandMasterKeyHash: 1B41607650EBF11C6B39F41CB267DC64C121A9BCF44DBA5D28F55ACC86361BBA366554CD57B4C466055803E1EF81C870\nBasebandRegionSKU: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==\nBasebandSerialNumber: 2GD9sw==\nBasebandStatus: BBInfoAvailable\nBasebandVersion: 3.10.04\nBluetoothAddress: 1c:e2:09:59:e4:37\nBoardId: 10\nBootSessionID: E7A8933C-63C5-4850-979B-1AF32A086C62\nBootstrapVersion: V1\nBrickState: false\nBuildVersion: 23B85\nCPUArchitecture: arm64e\nCarrierBundleInfoArray[1]:\n 0: CFBundleIdentifier: com.apple.TMobile_US\n  CFBundleVersion: 66.0\n  GID1: 544d\n  IntegratedCircuitCardIdentity: 8901260518765176919\n  InternationalMobileSubscriberIdentity: 310260516517691\n  MCC: 310\n  MNC: 260\n  SIMGID1: VE0=\n  Slot: kOne\n  kCTPostponementInfoAvailable: SIMCarrierInfo\nCertID: 3452763205\nChipID: 33056\nChipSerialNo: 2GD9sw==\nDeviceClass: iPhone\nDeviceColor: 1\nDeviceName: iPhone\nDieID: 1140850925658142\nEthernetAddress: 1c:e2:09:5b:10:a3\nFirmwareVersion: iBoot-13822.42.2\nFusingStatus: 3\nGID1: 544d\nHardwareModel: D38AP\nHardwarePlatform: t8120\nHasSiDP: true\nHostAttached: true\nHumanReadableProductVersionString: 26.1\nIntegratedCircuitCardIdentity: 8901260518765176919\nInternationalMobileEquipmentIdentity: 355278903935966\nInternationalMobileEquipmentIdentity2: 355278903675471\nInternationalMobileSubscriberIdentity: 310260516517691\nInternationalMobileSubscriberIdentityOverride: false\nMLBSerialNumber: C7HH91002HB00004CA\nMobileSubscriberCountryCode: 310\nMobileSubscriberNetworkCode: 260\nModelNumber: MTXR3\nNonVolatileRAM: StartupMute: MQ==\n SystemAudioVolumeExtension: SCA=\n alpm-24h-mode: MA==\n alpm-dst-offset: LTM2MDA=\n alpm-language-direction: MQ==\n alpm-next-dst: MTc5MzUxMjgwMA==\n alpm-number-system: bGF0bg==\n auto-boot: dHJ1ZQ==\n backlight-level: NDU2\n backlight-nits: MHgwMDUwMDAwMA==\n bootdelay: MA==\n fm-account-masked: Y+KAouKAouKAouKAouKAokBpY2xvdWQuY29t\n fm-activation-locked: WUVT\n fm-spkeys: YnBsaXN0MDDWAQIDBAUGBwgJCgsUUWxRcFFzUWJRdlFpTxAQYtrMMW6oSxqieZcWAzt3gE8QOQQ6bEJq0MSxrjehk+j/i4q6qsY+I6Da2bnhXbip+0kYRwi4e8RnO0wuDBWab1ZKPCk8L/5wV9+E/k8QIPjOFSkGTS07phL/Tsk19z3gSyenbGRjKR0/jN0DwCoBM0HG6jeYFdjx0gwNDhNRMlEx0g8QERJRbFFzEAAQYNIQDxIREAEIFRcZGx0fITRwk5yho6WqrK6wsrcAAAAAAAABAQAAAAAAAAAVAAAAAAAAAAAAAAAAAAAAuQ==\n fm-spstatus: WUVT\n obliteration: RUFDUyBEb25lIEAxNzQ3MTg5NDk4LCBDYWxsZXI6IE4vQSwgUmVhc29uOiBEaXNlbWJhcmsgW2dGOiAweDAwMDAwMDAwMDAwMDAwMDBd\n usbc,version,rid0: AIUgABUA\n utc-offset: LTE0NDAw\nPRIVersion_Major: 5\nPRIVersion_Minor: 0\nPRIVersion_ReleaseNo: 161\nPairRecordProtectionClass: 4\nPartitionType: GUID_partition_scheme\nPasswordProtected: false\nPhoneNumber: +1 (304) 657-1689\nPkHash: zcz8RYO/13J/v/fhzLcrXlobwVOI7uLOmi/2DTa3zDQcOqMWm9mW0EeRkiWZTi+t\nProductName: iPhone OS\nProductType: iPhone15,5\nProductVersion: 26.1\nProductionSOC: true\nProtocolVersion: 2\nRegionInfo: LL/A\nSIM1IsBootstrap: false\nSIM1IsEmbedded: true\nSIMGID1: VE0=\nSIMStatus: kCTSIMSupportSIMStatusReady\nSIMTrayStatus: kCTSIMSupportSIMTrayAbsent\nSerialNumber: KQ3129R0HX\nSoftwareBehavior: EQAAAAAAAAAAAAAAAAAAAA==\nSoftwareBundleVersion: \nSupportedDeviceFamilies[1]:\n 0: 1\nTelephonyCapability: true\nTimeIntervalSince1970: 1773283212.1918809\nTimeZone: America/New_York\nTimeZoneOffsetFromUTC: -14400\nTrustedHostAttached: true\nUniqueChipID: 1140850925658142\nUniqueDeviceID: 00008120-00040D990E2A601E\nUseRaptorCerts: true\nUses24HourClock: false\nWiFiAddress: 1c:e2:09:62:82:b9\nWirelessBoardSerialNumber: 1B1C1000FC34\nkCTPostponementInfoPRIVersion: 5.0.161\nkCTPostponementInfoServiceProvisioningState: true\nkCTPostponementStatus: kCTPostponementStatusActivated\n",
+        "stderr": "",
+        "duration_s": 0.243
+      },
+      "battery_raw": {
+        "ok": true,
+        "returncode": 0,
+        "cmd": [
+          "idevicediagnostics",
+          "-u",
+          "00008120-00040D990E2A601E",
+          "battery"
+        ],
+        "stdout": "Usage: idevicediagnostics [OPTIONS] COMMAND\n\nUse diagnostics interface of a device running iOS 4 or later.\n\nWhere COMMAND is one of:\n  diagnostics [TYPE]\t\tprint diagnostics information from device by TYPE (All, WiFi, GasGauge, NAND)\n  mobilegestalt KEY [...]\tprint mobilegestalt keys passed as arguments separated by a space.\n  ioreg [PLANE]\t\t\tprint IORegistry of device, optionally by PLANE (IODeviceTree, IOPower, IOService) (iOS 5+ only)\n  ioregentry [KEY]\t\tprint IORegistry entry of device (AppleARMPMUCharger, ASPStorage, ...) (iOS 5+ only)\n  shutdown\t\t\tshutdown device\n  restart\t\t\trestart device\n  sleep\t\t\t\tput device into sleep mode (disconnects from host)\n\nThe following OPTIONS are accepted:\n  -u, --udid UDID\ttarget specific device by UDID\n  -n, --network\t\tconnect to network device\n  -d, --debug\t\tenable communication debugging\n  -h, --help\t\tprints usage information\n  -v, --version\t\tprints version information\n\nHomepage:    <https://libimobiledevice.org>\nBug Reports: <https://github.com/libimobiledevice/libimobiledevice/issues>\n",
+        "stderr": "",
+        "duration_s": 0.002
+      }
+    }
+  ],
+  "ifuse_list_apps": null,
+  "pymobile_apps": null,
+  "syslog_sample": null
+}

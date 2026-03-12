@@ -1,0 +1,519 @@
+
+===== 2026-03-12T03:17:07Z udid=00008120-00040D990E2A601E =====
+[connected]
+Mar 11 23:17:05 financed(CoreData)[394] <Error>: CoreData: warning: cache_handle_memory_pressure invoked for core 0x744d88f00 / 528FF806-40C1-4DAE-8A3F-33270CB14634
+Mar 11 23:17:05 financed(CoreData)[394] <Error>: CoreData: warning: cache_handle_memory_pressure invoked for core 0x744de9e00 / 07499DD7-6537-45F7-9CC3-F8D90386B742
+Mar 11 23:17:05 financed(CoreData)[394] <Error>: CoreData: warning: cache_handle_memory_pressure invoked for core 0x744d7c000 / 07499DD7-6537-45F7-9CC3-F8D90386B742
+Mar 11 23:17:05 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:05 locationd[77] <Notice>: visitKFFilteredPressure,nowAP,794978225.772069,nowAOP,8188488390,filteredPressure,98292.515625,pressureTimestamp,8186896216,kfElevation,226.258163,wallTimePressureCorrected,794978224.200146,wallTimeKFCorrected,794978224.729322,temperatureDerivative,0.000000,absAltUnc,9.349962
+Mar 11 23:17:05 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:05 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:05 ptpd[908] <Notice>:          Event Queue | Connected: YES Can Send Events: NO
+Mar 11 23:17:05 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5923.435 lux=8.444<private> xy=(0.354 0.358) chs=[158 356 343 385 353] CCT1=4888.903 gain=256x mode=<private> subsamples=120 rawLux=10.728 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:05 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.443905 (delta 1.045856 / thr 10.000000)
+Mar 11 23:17:05 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x2a(DSD) Ind MsgId=0x5551 Bin=[<private>]
+Mar 11 23:17:06 corespeechd[173] <Notice>: -[CSSelfTriggerDetector _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] Output NDAPI self trigger best score = -25.386198 for channel = 1, client listening ? NO, audioSourceType 0, threshold = 2.413000
+Mar 11 23:17:06 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5923.693 lux=9.351<private> xy=(0.349 0.351) chs=[195 384 385 425 384] CCT1=5097.975 gain=256x mode=<private> subsamples=120 rawLux=11.635 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 9.350747 (delta 0.139013 / thr 10.000000)
+Mar 11 23:17:06 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:06 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:06 wifid(WiFiPolicy)[53] <Notice>: -[WiFiUserInteractionMonitor runPeriodicTasks]: cellular data did 1726 bytes (13 packets) over 10.000 seconds
+Mar 11 23:17:06 wifid(WiFiPolicy)[53] <Notice>: -[WiFiUserInteractionMonitor runPeriodicTasks]: WiFi data did 342(input:0 output:342) bytes, 1(input:0 output:1) packets over 10.000 seconds
+Mar 11 23:17:06 ptpd[908] <Notice>:             PTPGroup | New uncollected groups present (0/257) -- notifying
+Mar 11 23:17:06 corespeechd[173] <Notice>: -[CSBuiltInVoiceTrigger _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] NDAPI first pass best score = -1.800 for channel = 0, heartbeat = 54600
+Mar 11 23:17:06 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x03(NAS) Ind MsgId=0x0051 Sim=1 Bin=['01 18 00 80 03 09 04 36 0B 51 00 0C 00 17 04 00 A6 FF 13 01 18 02 00 F5 FF']
+Mar 11 23:17:06 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x03(NAS) Ind MsgId=0x0051 Bin=['01 18 00 80 03 12 04 93 02 51 00 0C 00 17 04 00 A6 FF 13 01 18 02 00 F5 FF']
+Mar 11 23:17:06 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5923.951 lux=10.153<private> xy=(0.344 0.350) chs=[214 431 418 450 409] CCT1=5218.396 gain=256x mode=<private> subsamples=120 rawLux=12.437 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.19, confidence: 0.803070
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 10.152665 (delta 0.662905 / thr 10.000000)
+Mar 11 23:17:06 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Audio Output: Speaker, Motion Status: On Body. Notifying OBD State: Body, Tuner State: Non-Freespace, Motion Status as an input: YES
+Mar 11 23:17:06 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Sending SAR Selection: 0x1, Tuner State: 0x1
+Mar 11 23:17:06 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x01(WDS) Ind MsgId=0x00a5 Sim=1 Bin=[<private>]
+Mar 11 23:17:06 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::sendOCPDataGated:821: Indicator: 0x53, CRC16: 0x8170, SeqNum: 74
+Mar 11 23:17:06 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x11)
+Mar 11 23:17:06 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0xd)
+Mar 11 23:17:06 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x10)
+Mar 11 23:17:06 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:469: Received READY_TO_FILL interrupt
+Mar 11 23:17:06 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:483: Received OCP write ready signal from the baseband
+Mar 11 23:17:06 symptomsd(SymptomEvaluator)[143] <Notice>: Data Usage for com.openai.chat on flow 10615 - WiFi in/out: 0/0, WiFi delta_in/delta_out: 0/0, Cell in/out: 31853890/24785257, Cell delta_in/delta_out: 300/326, RNF: 0, subscriber tag: 0, total duration: 520.979
+Mar 11 23:17:06 symptomsd(SymptomEvaluator)[143] <Notice>: Data Usage for org.freevpn.vpn.vpnExtension on flow 7387 - WiFi in/out: 0/0, WiFi delta_in/delta_out: 0/0, Cell in/out: 131179439/145298248, Cell delta_in/delta_out: 90/0, RNF: 0, subscriber tag: 0, total duration: 2746.276
+Mar 11 23:17:06 symptomsd(SymptomEvaluator)[143] <Notice>: Cell  PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:05.348 -0400 interval 1.202 rx-bytes 390 tx-bytes 326 rx-tput 0.002596 Mbps tx-tput 0.002170 Mbps
+Mar 11 23:17:06 symptomsd(SymptomEvaluator)[143] <Notice>: Wi-Fi PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:05.348 -0400 interval 1.202 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:06 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:06 corespeechd(CoreSpeechFoundation)[173] <Notice>: -[CSAudioRecorder voiceControllerAudioCallback:forStream:buffer:] Received audio buffer 2560, heartbeat = 55380, streamID (1)
+Mar 11 23:17:06 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:06 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5924.209 lux=10.127<private> xy=(0.351 0.358) chs=[192 426 416 455 406] CCT1=4966.630 gain=256x mode=<private> subsamples=120 rawLux=12.411 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.21, confidence: 0.815837
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 10.126643 (delta 0.636883 / thr 10.000000)
+Mar 11 23:17:06 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:06 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5924.467 lux=10.311<private> xy=(0.343 0.348) chs=[223 442 421 461 420] CCT1=5241.971 gain=256x mode=<private> subsamples=120 rawLux=12.595 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.19, confidence: 0.796630
+Mar 11 23:17:06 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 10.126643 (delta 0.636883 / thr 10.000000)
+Mar 11 23:17:06 ptpd[908] <Notice>:             PTPGroup | New uncollected groups present (0/255) -- notifying
+Mar 11 23:17:07 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I On Body Callback: OnBody: On Body, confidence: Confidence Level High
+Mar 11 23:17:07 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Audio State: Speaker, Proximity Sensor: Off, Motion State: On Body, Tx State: On -> Notifying Hand Detection: Default Hand
+Mar 11 23:17:07 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I On Body Callback: OnBody: On Body, confidence: Confidence Level High
+Mar 11 23:17:07 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Sending Grip State: 0x0
+Mar 11 23:17:07 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::sendOCPDataGated:821: Indicator: 0x10, CRC16: 0x8814, SeqNum: 75
+Mar 11 23:17:07 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x11)
+Mar 11 23:17:07 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0xd)
+Mar 11 23:17:07 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x10)
+Mar 11 23:17:07 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:469: Received READY_TO_FILL interrupt
+Mar 11 23:17:07 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:483: Received OCP write ready signal from the baseband
+Mar 11 23:17:07 locationd[77] <Notice>: os_transaction created: (<private>) <private>
+Mar 11 23:17:07 locationd[77] <Notice>: os_transaction released: (<private>) <private>
+Mar 11 23:17:07 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:07 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:07 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5924.725 lux=10.065<private> xy=(0.344 0.346) chs=[217 428 410 455 406] CCT1=5210.055 gain=256x mode=<private> subsamples=120 rawLux=12.349 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:07 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:07 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:07 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.18, confidence: 0.800332
+Mar 11 23:17:07 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 10.126643 (delta 0.636883 / thr 10.000000)
+Mar 11 23:17:07 corespeechd[173] <Notice>: -[CSSelfTriggerDetector _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] Output NDAPI self trigger best score = -25.386198 for channel = 1, client listening ? NO, audioSourceType 0, threshold = 2.413000
+Mar 11 23:17:07 ptpd[908] <Notice>:          Event Queue | Connected: YES Can Send Events: NO
+
+===== 2026-03-12T03:17:14Z udid=00008120-00040D990E2A601E =====
+[connected]
+Mar 11 23:17:12 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:12 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5930.401 lux=10.055<private> xy=(0.345 0.351) chs=[209 437 407 453 415] CCT1=5145.177 gain=256x mode=<private> subsamples=120 rawLux=12.340 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:12 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:12 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:12 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.19, confidence: 0.806913
+Mar 11 23:17:12 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 10.126643 (delta 0.636883 / thr 10.000000)
+Mar 11 23:17:12 nanotimekitcompaniond[1243] <Notice>: daemon exiting
+Mar 11 23:17:12 lsd(libxpc.dylib)[118] <Notice>: [0xd4ee45080] invalidated because the client process (pid 1243) either cancelled the connection or exited
+Mar 11 23:17:12 kernel(Sandbox)[0] <Notice>: /System/Library/PrivateFrameworks/NanoTimeKit.framework/nanotimekitcompaniond[1245] ==> temporary-sandbox
+Mar 11 23:17:12 nanotimekitcompaniond(libsystem_coreservices.dylib)[1245] <Notice>: _dirhelper_update_tmpdir: old=<private>, new=<private>
+Mar 11 23:17:12 nanotimekitcompaniond[1245] <Notice>: daemon is running with temporary directory /var/mobile/tmp/com.apple.nanotimekitcompaniond/
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: Has NanoRegistry entitlement com.apple.nano.nanoregistry.generalaccess
+Mar 11 23:17:12 nanotimekitcompaniond(libMobileGestalt.dylib)[1245] <Notice>: Cache loaded with 6210 pre-cached in CacheData and 78 items in CacheExtra.
+Mar 11 23:17:12 nanotimekitcompaniond(PairedDeviceRegistry)[1245] <Notice>: #refresh_795e Starting bootstrap sync refresh
+Mar 11 23:17:12 nanotimekitcompaniond(PairedDeviceRegistry)[1245] <Notice>: #refresh_795e 0.444708ms Daemon is idle, creating empty collection
+Mar 11 23:17:12 nanotimekitcompaniond(PairedDeviceRegistry)[1245] <Notice>: #refresh_795e 0.559791ms New collection swapped in
+Mar 11 23:17:12 nanotimekitcompaniond(PairedDeviceRegistry)[1245] <Notice>: #refresh_795e history 3fffffffffffffff -> 0000000000000001
+Mar 11 23:17:12 nanotimekitcompaniond(PairedDeviceRegistry)[1245] <Notice>: assignNewState complete
+Mar 11 23:17:12 nanotimekitcompaniond(PairedDeviceRegistry)[1245] <Notice>: RegistryCrux fully initialized and synced
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Error>: Creating a CLKDevice without an PDRDevice: (null)
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: Creating a CLKDevice. pdrDevice: (null)
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice sizeClass: 7
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice screenBounds: <private>
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice screenScale: 2.0
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice screenCornerRadius: 44.0
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice isLuxo: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice supportsTritium: 0
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice productType: -1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice NRDevicePropertyDeviceHousingColor: (null)
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Error>: <private>has no material, defaulting to light aluminum
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice <private>material: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: _collectionForDeviceBrand collection:1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice <private>collection: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice isZeusBlack: 0
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice isZeus10: 0
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice isExplorer: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice hasRichMediaComplications: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice runningGraceOrLater: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice supportsUrsa: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice supportsPolaris: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice supportsCharon: 1
+Mar 11 23:17:12 nanotimekitcompaniond(ClockKit)[1245] <Notice>: CLKDevice capabilityChanged: 1
+Mar 11 23:17:12 nanotimekitcompaniond(libxpc.dylib)[1245] <Notice>: [0x79b038000] activating connection: mach=true listener=false peer=false name=com.apple.lsd.mapdb
+Mar 11 23:17:12 lsd(libxpc.dylib)[118] <Notice>: [0xd4ee45080] activating connection: mach=false listener=false peer=true name=com.apple.lsd.mapdb.peer[1245].0xd4ee45080
+Mar 11 23:17:12 nanotimekitcompaniond[1245] <Error>: Couldn't find bridge record - Error Domain=NSOSStatusErrorDomain Code=-10814 "(null)" UserInfo={_LSFile=LSBindingEvaluator.mm, _LSLine=1973, _LSFunction=runEvaluator}
+Mar 11 23:17:12 nanotimekitcompaniond[1245] <Notice>: nanotimekitcompaniond should not be running because bridge is not installed--killing process!
+Mar 11 23:17:12 nanotimekitcompaniond(libxpc.dylib)[1245] <Notice>: [0x79b038140] activating connection: mach=true listener=true peer=false name=com.apple.nanotimekit.collectionserver
+Mar 11 23:17:12 nanotimekitcompaniond(libxpc.dylib)[1245] <Notice>: [0x79b038280] activating connection: mach=true listener=true peer=false name=com.apple.nanotimekit.complicationstoreserver
+Mar 11 23:17:12 nanotimekitcompaniond(libxpc.dylib)[1245] <Notice>: [0x79b0383c0] activating connection: mach=true listener=true peer=false name=com.apple.nanotimekit.facesnapshotserver
+Mar 11 23:17:12 nanotimekitcompaniond(libxpc.dylib)[1245] <Notice>: [0x79b038500] activating connection: mach=true listener=true peer=false name=com.apple.notifyd.matching
+Mar 11 23:17:12 nanotimekitcompaniond(libxpc.dylib)[1245] <Notice>: [0x79b038640] activating connection: mach=true listener=true peer=false name=com.apple.distnoted.matching
+Mar 11 23:17:12 nanotimekitcompaniond(libxpc.dylib)[1245] <Notice>: [0x79b038780] activating connection: mach=true listener=true peer=false name=com.apple.xpc.activity
+Mar 11 23:17:13 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5930.659 lux=10.198<private> xy=(0.352 0.358) chs=[195 423 418 464 403] CCT1=4950.605 gain=256x mode=<private> subsamples=120 rawLux=12.482 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:13 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:13 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:13 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.21, confidence: 0.814120
+Mar 11 23:17:13 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 10.197541 (delta 0.707781 / thr 10.000000)
+Mar 11 23:17:13 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Audio Output: Speaker, Motion Status: On Body. Notifying OBD State: Body, Tuner State: Non-Freespace, Motion Status as an input: YES
+Mar 11 23:17:13 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Sending SAR Selection: 0x1, Tuner State: 0x1
+Mar 11 23:17:13 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::sendOCPDataGated:821: Indicator: 0x53, CRC16: 0x2c24, SeqNum: 80
+Mar 11 23:17:13 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x11)
+Mar 11 23:17:13 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0xd)
+Mar 11 23:17:13 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x10)
+Mar 11 23:17:13 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:469: Received READY_TO_FILL interrupt
+Mar 11 23:17:13 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:483: Received OCP write ready signal from the baseband
+Mar 11 23:17:13 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:13 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:13 corespeechd[173] <Notice>: -[CSSelfTriggerDetector _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] Output NDAPI self trigger best score = -25.386198 for channel = 1, client listening ? NO, audioSourceType 0, threshold = 2.413000
+Mar 11 23:17:13 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5930.917 lux=9.149<private> xy=(0.348 0.350) chs=[192 386 371 419 378] CCT1=5104.432 gain=256x mode=<private> subsamples=120 rawLux=11.434 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:13 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 9.149276 (delta 0.340485 / thr 10.000000)
+Mar 11 23:17:13 backboardd(BackBoardHIDEventFoundation)[71] <Notice>: destinations for VendorDefined event: ()
+Mar 11 23:17:13 ptpd[908] <Notice>:             PTPGroup | New uncollected groups present (0/255) -- notifying
+Mar 11 23:17:13 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x03(NAS) Ind MsgId=0x0051 Sim=1 Bin=['01 18 00 80 03 09 04 39 0B 51 00 0C 00 17 04 00 A9 FF 37 01 18 02 00 F5 FF']
+Mar 11 23:17:13 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5931.175 lux=8.732<private> xy=(0.359 0.364) chs=[158 350 360 402 350] CCT1=4794.090 gain=256x mode=<private> subsamples=120 rawLux=11.016 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:13 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.731688 (delta 0.758072 / thr 10.000000)
+Mar 11 23:17:13 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:13 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:13 audiomxd(libAudioIssueDetector.dylib)[111] <Notice>: IssueReporting.cpp:492   RTAID [ use_case=Generic report_type=RMS Generic Chain clientID=HAL node=Actuator-Output issue_detected_sample_time=102220464.000000 ] -- [ rms:[-120.000000], peaks:[-240.000000] ]
+Mar 11 23:17:13 audiomxd(CoreAudio)[111] <Notice>:      HALS_IOStreamDSP.cpp:631    getting parameter <private>
+Mar 11 23:17:13 audiomxd(CoreAudio)[111] <Notice>:      HALS_IOStreamDSP.cpp:631    getting parameter <private>
+Mar 11 23:17:13 ptpd[908] <Notice>:          Event Queue | Connected: YES Can Send Events: NO
+Mar 11 23:17:13 kernel()[0] <Notice>: I [dk] <private>@28844: DTIM missed count: p2p(0), iovar(0), scan(0), roam(0), homechan(0), sleep(0), misc(0)
+Mar 11 23:17:13 symptomsd(SymptomEvaluator)[143] <Notice>: Cell  PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:12.547 -0400 interval 1.199 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:13 symptomsd(SymptomEvaluator)[143] <Notice>: Wi-Fi PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:12.547 -0400 interval 1.199 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:13 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:13 CommCenter[101] <Notice>: #I Do not enable/disable private network SIM <private>, controller in dormant state: kNoProfileMatched
+Mar 11 23:17:13 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5931.433 lux=8.582<private> xy=(0.354 0.359) chs=[158 367 346 394 356] CCT1=4859.536 gain=256x mode=<private> subsamples=120 rawLux=10.866 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:13 corespeechd(CoreSpeechFoundation)[173] <Notice>: -[CSAudioRecorder voiceControllerAudioCallback:forStream:buffer:] Received audio buffer 2560, heartbeat = 55560, streamID (1)
+Mar 11 23:17:13 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.581552 (delta 0.908209 / thr 10.000000)
+Mar 11 23:17:14 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5931.691 lux=8.487<private> xy=(0.357 0.361) chs=[155 361 340 394 359] CCT1=4806.593 gain=256x mode=<private> subsamples=120 rawLux=10.772 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:14 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.487398 (delta 1.002362 / thr 10.000000)
+Mar 11 23:17:14 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:14 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:14 audiomxd(libAudioIssueDetector.dylib)[111] <Notice>: IssueReporting.cpp:492   RTAID [ use_case=Generic report_type=RMS Generic Chain clientID=HAL node=AOP Audio-1-Input issue_detected_sample_time=131687672.000000 ] -- [ rms:[-41.274269], peaks:[-27.184074] ]
+Mar 11 23:17:14 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5931.949 lux=8.445<private> xy=(0.355 0.358) chs=[161 358 340 388 367] CCT1=4887.256 gain=256x mode=<private> subsamples=120 rawLux=10.729 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:14 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.445117 (delta 1.044643 / thr 10.000000)
+
+===== 2026-03-12T03:17:21Z udid=00008120-00040D990E2A601E =====
+[connected]
+Mar 11 23:17:19 locationd[77] <Notice>: os_transaction created: (<private>) <private>
+Mar 11 23:17:19 locationd[77] <Notice>: os_transaction released: (<private>) <private>
+Mar 11 23:17:19 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I On Body Callback: OnBody: On Body, confidence: Confidence Level Low
+Mar 11 23:17:19 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Audio State: Speaker, Proximity Sensor: Off, Motion State: On Body, Tx State: On -> Notifying Hand Detection: Default Hand
+Mar 11 23:17:19 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I On Body Callback: OnBody: On Body, confidence: Confidence Level Low
+Mar 11 23:17:19 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Sending Grip State: 0x0
+Mar 11 23:17:19 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::sendOCPDataGated:821: Indicator: 0x10, CRC16: 0x8beb, SeqNum: 86
+Mar 11 23:17:19 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x11)
+Mar 11 23:17:19 locationd[77] <Notice>: #Warning Input, <private>, time rolled back. Delta <private>, Previous Time <private>, Current Time <private>, Always Active <private>.
+Mar 11 23:17:19 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0xd)
+Mar 11 23:17:19 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x10)
+Mar 11 23:17:19 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:469: Received READY_TO_FILL interrupt
+Mar 11 23:17:19 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:483: Received OCP write ready signal from the baseband
+Mar 11 23:17:19 ptpd[908] <Notice>:             PTPGroup | New uncollected groups present (0/255) -- notifying
+Mar 11 23:17:20 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5937.625 lux=8.518<private> xy=(0.348 0.346) chs=[189 353 346 394 359] CCT1=5175.521 gain=256x mode=<private> subsamples=120 rawLux=10.802 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:20 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.517660 (delta 0.972100 / thr 10.000000)
+Mar 11 23:17:20 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:20 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:20 ptpd[908] <Notice>:          Event Queue | Connected: YES Can Send Events: NO
+Mar 11 23:17:20 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5937.882 lux=8.696<private> xy=(0.353 0.357) chs=[169 361 354 399 356] CCT1=4948.684 gain=256x mode=<private> subsamples=120 rawLux=10.980 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:20 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.695736 (delta 0.794024 / thr 10.000000)
+Mar 11 23:17:20 corespeechd[173] <Notice>: -[CSSelfTriggerDetector _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] Output NDAPI self trigger best score = -25.386198 for channel = 1, client listening ? NO, audioSourceType 0, threshold = 2.413000
+Mar 11 23:17:20 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x01(WDS) Ind MsgId=0x00a5 Sim=1 Bin=[<private>]
+Mar 11 23:17:20 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5938.140 lux=8.504<private> xy=(0.355 0.358) chs=[164 364 340 394 367] CCT1=4896.911 gain=256x mode=<private> subsamples=120 rawLux=10.788 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:20 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.503624 (delta 0.986136 / thr 10.000000)
+Mar 11 23:17:20 corespeechd[173] <Notice>: -[CSBuiltInVoiceTrigger _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] NDAPI first pass best score = -1.740 for channel = 0, heartbeat = 54950
+Mar 11 23:17:20 kernel[0] <Notice>: bpf0 attached to en0 by configd:45
+Mar 11 23:17:20 kernel[0] <Notice>: bpf0 closed and detached from en0 fcount 1 dcount 0 by configd:45
+Mar 11 23:17:20 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:20 thermalmonitord[67] <Error>: <Error> could not find `cpu-avg-limiter-input-w2r property
+Mar 11 23:17:20 thermalmonitord[67] <Error>: <Error> Failed to read `cpu-avg-limiter-input-w2r
+Mar 11 23:17:20 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938345936291: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938345984500: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346627125: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346632541: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346635000: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346636791: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346638250: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346639833: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346641333: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346642875: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346644291: <private>
+Mar 11 23:17:20 watchdogd[62] <Notice>: 5938346645708: <private>
+Mar 11 23:17:20 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:20 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:20 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:20 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5938.398 lux=9.769<private> xy=(0.349 0.356) chs=[189 417 399 439 395] CCT1=5016.625 gain=256x mode=<private> subsamples=120 rawLux=12.053 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:20 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 9.769111 (delta 0.279350 / thr 10.000000)
+Mar 11 23:17:20 locationd(TrackingAvoidance)[77] <Notice>: <private>
+Mar 11 23:17:20 locationd[77] <Notice>: {"msg":"onAvengerAdvertisementDetected convertToSPAdvertisement", "address":<private>, "data":<private>, "date":<private>, "rssi":<private>, "status":<private>, "reserved":<private>, "subHarvester":"ADLAvenger"}
+Mar 11 23:17:20 locationd[77] <Notice>: {"msg":"onAvengerAdvertisementDetected: advertisement is near-owner from other people and do not process it", "subHarvester":"ADLAvenger"}
+Mar 11 23:17:20 locationd[77] <Notice>: {"msg":"onAvengerAdvertisementDetected: got avenger advertisement", "subHarvester":"Avenger"}
+Mar 11 23:17:20 locationd[77] <Notice>: {"msg":"convertToSPAdvertisement", "address":<private>, "data":<private>, "date":<private>, "rssi":<private>, "status":<private>, "reserved":<private>, "subHarvester":"Avenger"}
+Mar 11 23:17:20 locationd[77] <Notice>: {"msg":"onAvengerAdvertisementDetected: advertisement is near-owner from other people and do not process it", "subHarvester":"Avenger"}
+Mar 11 23:17:20 symptomsd(SymptomEvaluator)[143] <Notice>: Cell  PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:19.747 -0400 interval 1.201 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:20 symptomsd(SymptomEvaluator)[143] <Notice>: Wi-Fi PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:19.747 -0400 interval 1.201 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:21 ptpd[908] <Notice>:          Event Queue | Connected: YES Can Send Events: NO
+Mar 11 23:17:21 locationd(libxpc.dylib)[77] <Notice>: [0x809a4ca00] activating connection: mach=true listener=false peer=false name=com.apple.tccd
+Mar 11 23:17:21 tccd(libxpc.dylib)[47] <Notice>: [0xd450a9cc0] activating connection: mach=false listener=false peer=true name=com.apple.tccd.peer[77].0xd450a9cc0
+Mar 11 23:17:21 tccd[47] <Notice>: REQUEST: tccd_uid=501, sender_pid=77, sender_uid=0, sender_auid=-1, function=TCCAccessCopyInformation, msgID=77.346
+Mar 11 23:17:21 tccd[47] <Notice>: REPLY: (501) function=TCCAccessCopyInformation, msgID=77.346
+Mar 11 23:17:21 locationd(libxpc.dylib)[77] <Notice>: [0x809a4ca00] invalidated after the last release of the connection object
+Mar 11 23:17:21 tccd(libxpc.dylib)[47] <Notice>: [0xd450a9cc0] invalidated because the client process (pid 77) either cancelled the connection or exited
+Mar 11 23:17:21 corespeechd(CoreSpeechFoundation)[173] <Notice>: -[CSAudioRecorder voiceControllerAudioCallback:forStream:buffer:] Received audio buffer 2560, heartbeat = 55740, streamID (1)
+Mar 11 23:17:21 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5938.656 lux=9.878<private> xy=(0.347 0.354) chs=[197 426 402 444 401] CCT1=5078.557 gain=256x mode=<private> subsamples=120 rawLux=12.162 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:21 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 9.878078 (delta 0.388317 / thr 10.000000)
+Mar 11 23:17:21 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:21 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:21 ptpd[908] <Notice>:             PTPGroup | New uncollected groups present (0/257) -- notifying
+Mar 11 23:17:21 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5938.914 lux=10.295<private> xy=(0.345 0.353) chs=[209 437 424 458 401] CCT1=5144.750 gain=256x mode=<private> subsamples=120 rawLux=12.580 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:21 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:21 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:21 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.20, confidence: 0.808970
+
+===== 2026-03-12T03:17:28Z udid=00008120-00040D990E2A601E =====
+[connected]
+Mar 11 23:17:26 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:26 symptomsd(SymptomEvaluator)[143] <Notice>: Data Usage for com.openai.chat on flow 10615 - WiFi in/out: 0/0, WiFi delta_in/delta_out: 0/0, Cell in/out: 31854586/24786230, Cell delta_in/delta_out: 300/326, RNF: 0, subscriber tag: 0, total duration: 541.378
+Mar 11 23:17:26 symptomsd(SymptomEvaluator)[143] <Notice>: Data Usage for org.freevpn.vpn.vpnExtension on flow 7387 - WiFi in/out: 0/0, WiFi delta_in/delta_out: 0/0, Cell in/out: 131179609/145298248, Cell delta_in/delta_out: 50/0, RNF: 0, subscriber tag: 0, total duration: 2766.675
+Mar 11 23:17:26 symptomsd(SymptomEvaluator)[143] <Notice>: Cell  PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:25.747 -0400 interval 1.200 rx-bytes 350 tx-bytes 326 rx-tput 0.002332 Mbps tx-tput 0.002173 Mbps
+Mar 11 23:17:26 symptomsd(SymptomEvaluator)[143] <Notice>: Wi-Fi PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:25.747 -0400 interval 1.200 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:27 locationd[77] <Notice>: visitKFFilteredPressure,nowAP,794978247.018307,nowAOP,8209735496,filteredPressure,98295.257812,pressureTimestamp,8208143421,kfElevation,226.126099,wallTimePressureCorrected,794978245.447351,wallTimeKFCorrected,794978245.976501,temperatureDerivative,0.000000,absAltUnc,9.352800
+Mar 11 23:17:27 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5944.590 lux=10.109<private> xy=(0.349 0.356) chs=[200 420 418 450 417] CCT1=5055.229 gain=256x mode=<private> subsamples=120 rawLux=12.393 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.20, confidence: 0.815267
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 10.197541 (delta 0.707781 / thr 10.000000)
+Mar 11 23:17:27 locationd[77] <Notice>: os_transaction released: (<private>) <private>
+Mar 11 23:17:27 locationd[77] <Notice>: {"msg":"#sbim client arrow state changed", "Client":"p\134/System\134/Library\134/LocationBundles\134/SystemCustomization.bundle:", "entityClass":"SystemService", "oldArrowState":"ReceivingLocationInformation", "newArrowState":"RequestingLocationInformation", "dueToDeauthorization":0}
+Mar 11 23:17:27 locationd[77] <Notice>: {"msg":"#sbim entity class arrow state changed", "entityClass":"SystemService", "oldArrowState":"ReceivingLocationInformation", "newArrowState":"RequestingLocationInformation", "dueToDeauthorization":0}
+Mar 11 23:17:27 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0xe7(ELQM) Ind MsgId=0x0002 Bin=[<private>]
+Mar 11 23:17:27 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x03(NAS) Ind MsgId=0x0051 Sim=1 Bin=['01 18 00 80 03 09 04 3C 0B 51 00 0C 00 17 04 00 AA FF 36 01 18 02 00 F5 FF']
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I   --------------> kCTEventEnhancedLinkQualityUpdate (128) sent to 0 (of 73) clients.
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: eLQM: Received BB link state notification payload = {length = 5, bytes = 0x0201320000}
+Mar 11 23:17:27 locationd[77] <Notice>: #EmergCon,EMERGENCY:notification,kLinkQualityNotification
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: eLQM: Updated cell states (payload = {length = 5, bytes = 0x0201320000}): (LQM = 50, RRC = 1, INTF = 1)
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: realTimeLqm was last updated on interface type 5 at 1773285447082.978027
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: Computing loaded LQM upon eLQM notification on interface type 5, LQM(old/new) = (100/50)
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: Realtime LQM changed: new-lqm 50 old-lqm 100 data-stalls 0.00 known-good 1 hot-spot 0 interface-type 5
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: Realtime LQM changed: new-lqm 50 old-lqm 100 data-stalls 0.00 known-good 1 hot-spot 0 interface-type 5
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: Incrementing loaded LQM transitions = 1.000000, interface = pdp_ip0, primaryKey = <private>, loaded LQM(old/new) = (100/50), LOI (extended) = 260
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: Populating a new LQM journal record for primaryKey = <private> (<private>)
+Mar 11 23:17:27 CommCenter[101] <Notice>: Sent notification to 4 (of 47) clients: <private>
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: Appending a new journal record in memory, record = <private>, pending records = 10784 bytes
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: Starting lowLqm timer for <private>
+Mar 11 23:17:27 WirelessRadioManagerd[51] <Notice>: <private>
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: MPTCP: cell advice now set to 0
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: pendedLqm = 0, primaryKey = <private>
+Mar 11 23:17:27 kernel[0] <Notice>: mptcp_symptoms_ctl_send: wifi new,old: 2,2, cell new, old: 0,0
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: linkQuality updated, interface type = 5, delay = 6.929142 ms, (old/new) = (100/50)
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: MPTCP: Advising Cell, advice = 5
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: CFSM Current state: idle, changed: linkQuality to 50 for net type 5
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: CFSM Eligible to go to alerted
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: linkQuality changed to 50 as loaded LQM changed on interface type 5 noi: NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:1
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: CFSM Current state: idle, changed: linkQuality to 50 for net type 5, eligible for alerted but constraints unsatisfied (-1,0,1,0)
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: CFSM Current state: idle, changed: linkQuality to 50 for net type 5, ineligible for committed as nil pred, wifi (0x0) cell (0x0)
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: CFSM Current state: idle, changed: linkQuality to 50 for net type 5, ineligible for preferred as nil pred, wifi (0x0) cell (0x0)
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: linkQuality changed to 50 as loaded LQM changed on interface type 5 noi: NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:no, isBuiltin:yes, loi:0, flags:0
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Error>: 0x28b23b730 unexpected radio technology from baseband: 0, defaulting to unknown
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: CFSM Relays: Cellular (active/primary/constrained-no/expensive-no/rssifull-no/rssithresh-no/txthresh-no/arp-ok/dns-ok/i-dns-ok/i-stuck-ok/rssiexempt:0/tcp-no/apsd-ok/1ppservconnfric-ok/tcphints:0/lqm:50/advisory:5/pwrDL:0/pwrUL:1/ic:3/txRate:0.0/rxRate:0.0) WiFi (active-no/primary-no/constrained-no/expensive-no/rssifull-no/rssithresh-no/txthresh-no/arp-ok/dns-ok/i-dns-ok/i-stuck-ok/rssiexempt:0/tcp-no/apsd-ok/1ppservconnfric-ok/tcphints:0/lqm:-2/advisory:0/pwrDL:1/pwrUL:1/ic:0/loi:unkn/txRate:0.0/rxRate:0.0)
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: linkQuality changed to 50 as loaded LQM changed on interface type 5 noi: NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6dd3340:181> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 181, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6dd3a80:397> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 397, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6dd3780:280> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 280, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6c27980:179> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 179, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6c271c0:174> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 174, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6c27140:231> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 231, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6c26fc0:68> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 68, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6c27100:50> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 50, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6c27280:179> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 179, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: NOICLIENT <0xbc6c27200:38> observed linkQuality of object NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, partial update to pid: 38, change: {
+    kind = 1;
+    new = 50;
+}
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: noi: NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0, event: linkQuality, oldLoadedLqm: 100, rawLoadedLqm: 50, newLoadedLqm: 50, not posting
+Mar 11 23:17:27 symptomsd(SymptomEvaluator)[143] <Notice>: linkQuality changed to 50 as loaded LQM changed on interface type 5 noi: NOI(SFNetworkOfInterest): v:0 type:Cellular, isAny:no, isBuiltin:yes, loi:1, flags:0
+Mar 11 23:17:27 itunescloudd(iTunesCloud)[179] <Notice>: Received link quality change on interface NOI(NWNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0. linkQuality=50
+Mar 11 23:17:27 itunescloudd(iTunesCloud)[179] <Notice>: Network reachability values changed. networkType=4, telephonyDataIndicator=8, isRemoteServerReachable=YES, isRemoteServerLikelyReachable=YES, currentNetworkLinkQuality=50 (high), _currentNetworkLinkExpensive=NO, _wifiAssociated=NO, _ethernetWired=NO, _networkConstrained=NO
+Mar 11 23:17:27 itunescloudd(iTunesCloud)[179] <Notice>: <ICInAppMessageManager: 0xae756c9a0> Initiating downloads for messages marked for caching
+Mar 11 23:17:27 contextstored(KnowledgeMonitor)[68] <Notice>: Network quality for <private> is 50
+Mar 11 23:17:27 atc(iTunesCloud)[50] <Notice>: Received link quality change on interface NOI(NWNetworkOfInterest): v:0 type:Cellular, isAny:yes, isBuiltin:no, loi:-1, flags:0. linkQuality=50
+Mar 11 23:17:27 atc(iTunesCloud)[50] <Notice>: Network reachability values changed. networkType=4, telephonyDataIndicator=8, isRemoteServerReachable=YES, isRemoteServerLikelyReachable=YES, currentNetworkLinkQuality=50 (high), _currentNetworkLinkExpensive=NO, _wifiAssociated=NO, _ethernetWired=NO, _networkConstrained=NO
+Mar 11 23:17:27 atc(libxpc.dylib)[50] <Notice>: [0x688e40a00] activating connection: mach=true listener=false peer=false name=com.apple.commcenter.xpc
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I New CTServerConnection from pid 50 (conn=0x6a04bed00)
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I  -- connection has entitlements: <private>
+Mar 11 23:17:27 CommCenter(libxpc.dylib)[101] <Notice>: [0x6a04bed00] activating connection: mach=false listener=false peer=true name=com.apple.commcenter.xpc.peer[50].0x6a04bed00
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I <private> request: <private>.
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I CTServerConnection from pid 50[<private>] is named '<private>'.
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I <private> request: <private>, expects reply.
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I <private> reply to request '<private>'.
+Mar 11 23:17:27 atc(iTunesCloud)[50] <Notice>: ICNetworkConstraints 0x688d92d00 [com.apple.Music] - cellularDataAllowed:YES, wifiDataAllowed:YES
+Mar 11 23:17:27 atc(libxpc.dylib)[50] <Notice>: [0x688e40a00] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+Mar 11 23:17:27 CommCenter(libxpc.dylib)[101] <Notice>: [0x6a04bed00] invalidated because the client process (pid 50) either cancelled the connection or exited
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I CTServerConnection from pid 50 has closed (conn=0x6a04bed00)
+Mar 11 23:17:27 contextstored(CoreDuetContext)[68] <Notice>: Sending fired registration <private> to (null)
+Mar 11 23:17:27 atc(CoreTelephony)[50] <Notice>: #I Connection (com.apple.itunescloud.ICNetworkConstraints) invalidated
+Mar 11 23:17:27 itunescloudd[179] <Notice>: <CloudPushNotificationController: 0xae756d650> Network reachability changed to available - updating push registration if needed
+Mar 11 23:17:27 itunescloudd[179] <Notice>: <CloudPushNotificationController: 0xae756d650> Updating push notification registration
+Mar 11 23:17:27 dasd(CoreDuetContext)[84] <Notice>: Registration fired for <private>
+Mar 11 23:17:27 dasd(CoreDuetContext)[84] <Error>: Dispatching call to deprecated registration callback for <private>, this may lead to priority problems. Switch to non-deprecated _CDContextualChangeRegistration APIs.
+Mar 11 23:17:27 itunescloudd(AppleMediaServices)[179] <Notice>: ACAccount: ams_cookies Fetching cookies from cookie storage for account: <ACAccount: 0xae7866700 type = iTunesStore | backingID = 3899D9AD-85D0-4194-A4FA-EE5B3D31FDC8 | username = local | storefront = H:621710006a>
+Mar 11 23:17:27 itunescloudd(AppleMediaServices)[179] <Notice>: ACAccount: ams_cookies Fetched 4 cookies from cookie storage for account: <ACAccount: 0xae7866700 type = iTunesStore | backingID = 3899D9AD-85D0-4194-A4FA-EE5B3D31FDC8 | username = local | storefront = H:621710006a>
+Mar 11 23:17:27 itunescloudd(AppleMediaServices)[179] <Notice>: ACAccount: ams_cookies Fetching cookies from cookie storage for account: <ACAccount: 0xae7866700 type = iTunesStore | backingID = 728994CB-1074-48DA-B3DE-7A57B1F7613C | username = H:77fdf0f3f0 | altDSID = H:c5e8f13965 | DSID = H:fb05fb45e3 | active = true | storefront = H:621710006a>
+Mar 11 23:17:27 itunescloudd(AppleMediaServices)[179] <Notice>: ACAccount: ams_cookies Fetched 35 cookies from cookie storage for account: <ACAccount: 0xae7866700 type = iTunesStore | backingID = 728994CB-1074-48DA-B3DE-7A57B1F7613C | username = H:77fdf0f3f0 | altDSID = H:c5e8f13965 | DSID = H:fb05fb45e3 | active = true | storefront = H:621710006a>
+Mar 11 23:17:27 itunescloudd[179] <Notice>: <CloudPushNotificationController: 0xae756d650> Updating push registration for configuration <ICConnectionConfiguration 0xae6dbc5f0 [userIdentity:<ICUserIdentity 0xae75fa400: [Account: <c6c265cc6c4bed7c2716ce60b20cd601a087e9ff>]>]>
+Mar 11 23:17:27 itunescloudd[179] <Notice>: <CloudPushNotificationController: 0xae756d650> Push notification registration up to date for configuration <ICConnectionConfiguration 0xae6dbc5f0 [userIdentity:<ICUserIdentity 0xae75fa400: [Account: <c6c265cc6c4bed7c2716ce60b20cd601a087e9ff>]>]>
+Mar 11 23:17:27 itunescloudd[179] <Notice>: <CloudPushNotificationController: 0xae756d650> Finished push registration
+Mar 11 23:17:27 atc(MusicLibrary)[50] <Notice>: Downloads for media type (8 => 'MLMediaTypeSong') are <private> on cellular data
+Mar 11 23:17:27 atc(MusicLibrary)[50] <Notice>: Downloads for media type (8 => 'MLMediaTypeSong') are <private> on the current network: networkType:4 (Cellular), isCurrentNetworkLinkQualityTooLow=NO
+Mar 11 23:17:27 atc(libxpc.dylib)[50] <Notice>: [0x688e40a00] activating connection: mach=true listener=false peer=false name=com.apple.commcenter.xpc
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I New CTServerConnection from pid 50 (conn=0x6a04bed00)
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I  -- connection has entitlements: <private>
+Mar 11 23:17:27 CommCenter(libxpc.dylib)[101] <Notice>: [0x6a04bed00] activating connection: mach=false listener=false peer=true name=com.apple.commcenter.xpc.peer[50].0x6a04bed00
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I <private> request: <private>.
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I CTServerConnection from pid 50[<private>] is named '<private>'.
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I <private> request: <private>, expects reply.
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I <private> reply to request '<private>'.
+Mar 11 23:17:27 atc(iTunesCloud)[50] <Notice>: ICNetworkConstraints 0x688d92d00 [com.apple.podcasts] - cellularDataAllowed:YES, wifiDataAllowed:YES
+Mar 11 23:17:27 atc(MusicLibrary)[50] <Notice>: Downloads for media type (4 => 'MLMediaTypePodcast') are <private> on cellular data
+Mar 11 23:17:27 atc(MusicLibrary)[50] <Notice>: Downloads for media type (4 => 'MLMediaTypePodcast') are <private> on the current network: networkType:4 (Cellular), isCurrentNetworkLinkQualityTooLow=NO
+Mar 11 23:17:27 atc(libxpc.dylib)[50] <Notice>: [0x688e40a00] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+Mar 11 23:17:27 atc(MusicLibrary)[50] <Notice>: handling network reachability or cellular policy changed notification. musicDownloadsAllowed=NO, podcastsDownloadsAllowed=YES, isNetworkConstrained=NO, networkTypeIsCellular=YES
+Mar 11 23:17:27 atc(CoreTelephony)[50] <Notice>: #I Connection (com.apple.itunescloud.ICNetworkConstraints) invalidated
+Mar 11 23:17:27 CommCenter(libxpc.dylib)[101] <Notice>: [0x6a04bed00] invalidated because the client process (pid 50) either cancelled the connection or exited
+Mar 11 23:17:27 CommCenter[101] <Notice>: #I CTServerConnection from pid 50 has closed (conn=0x6a04bed00)
+Mar 11 23:17:27 atc(MusicLibrary)[50] <Notice>: starting background keep local session with enqueueAssets=YES, forceNoDelay=NO
+Mar 11 23:17:27 atc(ATFoundation)[50] <Notice>: <ATAssetLinkController: 0x688cade00> cancelling assets matching predicate enqueueSource == 2 AND assetType == "Music". excludeActiveDownloads=NO
+Mar 11 23:17:27 atc(ATFoundation)[50] <Notice>: <ATAssetLinkController: 0x688cade00> cancelling 0 assets
+Mar 11 23:17:27 atc(MusicLibrary)[50] <Notice>: <MLSyncKeepLocalEventHandler: 0x688ca3480> not starting a keep-local evaluation because there are no supported media apps installed
+Mar 11 23:17:27 dasd[84] <Notice>: Blue List notification called (<private>)
+Mar 11 23:17:27 contextstored(CoreDuetContext)[68] <Notice>: Sending fired registration <private> to com.apple.dasd.trigger
+Mar 11 23:17:27 dasd(CoreDuetContext)[84] <Notice>: Registration fired for <private>
+Mar 11 23:17:27 dasd(CoreDuetContext)[84] <Notice>: Dispatching call to informative registration callback for <private>
+Mar 11 23:17:27 dasd[84] <Notice>: Trigger: <private> is now [<private>]
+Mar 11 23:17:27 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:27 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:27 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x2a(DSD) Ind MsgId=0x5551 Bin=[<private>]
+Mar 11 23:17:27 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5944.848 lux=10.344<private> xy=(0.349 0.358) chs=[200 434 427 461 415] CCT1=5029.398 gain=256x mode=<private> subsamples=120 rawLux=12.628 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: mlmArrIn: <private>
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: [V2.1] Input features: <private>
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: [<private>]strength: 0.20, confidence: 0.815252
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 10.197541 (delta 0.707781 / thr 10.000000)
+Mar 11 23:17:27 ptpd[908] <Notice>:          Event Queue | Connected: YES Can Send Events: NO
+Mar 11 23:17:27 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5945.106 lux=8.917<private> xy=(0.354 0.358) chs=[169 378 360 411 370] CCT1=4900.463 gain=256x mode=<private> subsamples=120 rawLux=11.201 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.916800 (delta 0.572961 / thr 10.000000)
+Mar 11 23:17:27 locationd[77] <Notice>: os_transaction created: (<private>) <private>
+Mar 11 23:17:27 locationd[77] <Notice>: os_transaction released: (<private>) <private>
+Mar 11 23:17:27 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I On Body Callback: OnBody: On Body, confidence: Confidence Level Low
+Mar 11 23:17:27 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Audio State: Speaker, Proximity Sensor: Off, Motion State: On Body, Tx State: On -> Notifying Hand Detection: Default Hand
+Mar 11 23:17:27 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I On Body Callback: OnBody: On Body, confidence: Confidence Level Low
+Mar 11 23:17:27 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Sending Grip State: 0x0
+Mar 11 23:17:27 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::sendOCPDataGated:821: Indicator: 0x10, CRC16: 0x73ea, SeqNum: 92
+Mar 11 23:17:27 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x11)
+Mar 11 23:17:27 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0xd)
+Mar 11 23:17:27 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x10)
+Mar 11 23:17:27 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:469: Received READY_TO_FILL interrupt
+Mar 11 23:17:27 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:483: Received OCP write ready signal from the baseband
+Mar 11 23:17:27 corespeechd[173] <Notice>: -[CSSelfTriggerDetector _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] Output NDAPI self trigger best score = -25.386198 for channel = 1, client listening ? NO, audioSourceType 0, threshold = 2.413000
+Mar 11 23:17:27 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:27 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:27 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5945.364 lux=8.454<private> xy=(0.356 0.358) chs=[164 350 343 391 359] CCT1=4899.313 gain=256x mode=<private> subsamples=120 rawLux=10.739 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:27 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.454209 (delta 1.035551 / thr 10.000000)
+Mar 11 23:17:27 ptpd[908] <Notice>:             PTPGroup | New uncollected groups present (0/257) -- notifying
+Mar 11 23:17:27 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:28 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5945.622 lux=8.413<private> xy=(0.358 0.361) chs=[155 350 340 391 347] CCT1=4815.169 gain=256x mode=<private> subsamples=120 rawLux=10.698 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:28 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.413478 (delta 1.076283 / thr 10.000000)
+Mar 11 23:17:28 symptomsd(SymptomEvaluator)[143] <Notice>: Cell  PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:26.947 -0400 interval 1.199 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:28 symptomsd(SymptomEvaluator)[143] <Notice>: Wi-Fi PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:26.947 -0400 interval 1.199 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:28 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Audio Output: Speaker, Motion Status: On Body. Notifying OBD State: Body, Tuner State: Non-Freespace, Motion Status as an input: YES
+Mar 11 23:17:28 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Sending SAR Selection: 0x1, Tuner State: 0x1
+Mar 11 23:17:28 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::sendOCPDataGated:821: Indicator: 0x53, CRC16: 0x7a8e, SeqNum: 93
+Mar 11 23:17:28 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x11)
+Mar 11 23:17:28 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0xd)
+Mar 11 23:17:28 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x10)
+Mar 11 23:17:28 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:469: Received READY_TO_FILL interrupt
+Mar 11 23:17:28 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:483: Received OCP write ready signal from the baseband
+Mar 11 23:17:28 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:28 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:28 corespeechd(CoreSpeechFoundation)[173] <Notice>: -[CSAudioRecorder voiceControllerAudioCallback:forStream:buffer:] Received audio buffer 2560, heartbeat = 55920, streamID (1)
+Mar 11 23:17:28 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5945.880 lux=8.649<private> xy=(0.360 0.362) chs=[158 358 348 405 359] CCT1=4773.431 gain=256x mode=<private> subsamples=120 rawLux=10.933 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:28 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.648676 (delta 0.841084 / thr 10.000000)
+Mar 11 23:17:28 locationd[77] <Notice>: stuffMsgGetTimingAdvance,requested rat,6,sub_id,0,for this platforms
+Mar 11 23:17:28 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: #I [<private>] queueing qmux pdu for svc=6 client=1 (txid=1312 msgid=0xe0) [tx-slot=1, rx-pending=0]
+Mar 11 23:17:28 locationd[77] <Notice>: @CellFlow, ctnotify, kTimingAdvanceInfoNotification, havedata, 1
+
+===== 2026-03-12T03:17:35Z udid=00008120-00040D990E2A601E =====
+[connected]
+Mar 11 23:17:33 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:34 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5951.556 lux=9.570<private> xy=(0.352 0.359) chs=[181 398 393 433 381] CCT1=4941.213 gain=256x mode=<private> subsamples=120 rawLux=11.855 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:34 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 9.570162 (delta 0.080401 / thr 10.000000)
+Mar 11 23:17:34 ptpd[908] <Notice>:          Event Queue | Connected: YES Can Send Events: NO
+Mar 11 23:17:34 symptomsd(SymptomEvaluator)[143] <Notice>: Cell  PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:32.933 -0400 interval 1.216 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:34 symptomsd(SymptomEvaluator)[143] <Notice>: Wi-Fi PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:32.933 -0400 interval 1.216 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:34 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:34 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:34 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5951.814 lux=8.615<private> xy=(0.355 0.359) chs=[161 358 351 394 356] CCT1=4879.034 gain=256x mode=<private> subsamples=120 rawLux=10.899 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:34 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.614777 (delta 0.874984 / thr 10.000000)
+Mar 11 23:17:34 UserEventAgent(IOAccessoryManager)[32] <Notice>: LDCM - Beginning LDCM measurement. Reason: 2
+Mar 11 23:17:34 kernel(IOAccessoryManager)[0] <Notice>: IOPortFeatureLDCMUserClient::_copyData(): Copying LDCM data... (target: Port-USB-C@1/LDCM)
+Mar 11 23:17:34 ptpd[908] <Notice>:             PTPGroup | New uncollected groups present (0/257) -- notifying
+Mar 11 23:17:34 locationd[77] <Notice>: stuffMsgGetTimingAdvance,requested rat,6,sub_id,0,for this platforms
+Mar 11 23:17:34 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: #I [<private>] queueing qmux pdu for svc=6 client=1 (txid=1313 msgid=0xe0) [tx-slot=1, rx-pending=0]
+Mar 11 23:17:34 locationd[77] <Notice>: @CellFlow, ctnotify, kTimingAdvanceInfoNotification, havedata, 1
+Mar 11 23:17:34 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: #I [<private>] queueing qmux pdu for svc=1 client=4 (txid=335 msgid=0x555b) [tx-slot=1, rx-pending=0]
+Mar 11 23:17:34 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x01(WDS) Req MsgId=0x555b Sim=1 Bin=[<private>]
+Mar 11 23:17:34 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x01(WDS) Resp MsgId=0x555b Sim=1 Bin=[<private>]
+Mar 11 23:17:34 audiomxd(libAudioIssueDetector.dylib)[111] <Notice>: IssueReporting.cpp:492   RTAID [ use_case=Generic report_type=RMS Generic Chain clientID=HAL node=AOP Audio-1-Input issue_detected_sample_time=132007672.000000 ] -- [ rms:[-42.278442], peaks:[-31.518614] ]
+Mar 11 23:17:34 CommCenter(libATCommandStudioDynamic.dylib)[101] <Notice>: QMI: Svc=0x01(WDS) Ind MsgId=0x00a5 Sim=1 Bin=[<private>]
+Mar 11 23:17:34 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5952.072 lux=8.574<private> xy=(0.348 0.353) chs=[175 361 351 385 356] CCT1=5094.460 gain=256x mode=<private> subsamples=120 rawLux=10.859 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:34 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.574218 (delta 0.915543 / thr 10.000000)
+Mar 11 23:17:34 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Audio Output: Speaker, Motion Status: On Body. Notifying OBD State: Body, Tuner State: Non-Freespace, Motion Status as an input: YES
+Mar 11 23:17:34 corespeechd[173] <Notice>: -[CSBuiltInVoiceTrigger _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] NDAPI first pass best score = -2.002 for channel = 0, heartbeat = 55300
+Mar 11 23:17:34 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Sending SAR Selection: 0x1, Tuner State: 0x1
+Mar 11 23:17:34 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::sendOCPDataGated:821: Indicator: 0x53, CRC16: 0xa171, SeqNum: 98
+Mar 11 23:17:34 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x11)
+Mar 11 23:17:34 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0xd)
+Mar 11 23:17:34 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x10)
+Mar 11 23:17:34 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:469: Received READY_TO_FILL interrupt
+Mar 11 23:17:34 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:483: Received OCP write ready signal from the baseband
+Mar 11 23:17:34 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:34 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:34 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5952.330 lux=8.381<private> xy=(0.360 0.364) chs=[147 350 337 391 350] CCT1=4709.656 gain=256x mode=<private> subsamples=120 rawLux=10.666 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:34 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.381325 (delta 1.108436 / thr 10.000000)
+Mar 11 23:17:34 heard(HearingUtilities)[263] <Notice>: AXHeardController: BT not yet ready, delaying shutdown check
+Mar 11 23:17:34 corespeechd[173] <Notice>: -[CSSelfTriggerDetector _keywordAnalyzerNDAPI:hasResultAvailable:forChannel:] Output NDAPI self trigger best score = -25.386198 for channel = 1, client listening ? NO, audioSourceType 0, threshold = 2.413000
+Mar 11 23:17:35 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5952.588 lux=8.515<private> xy=(0.358 0.366) chs=[141 364 343 391 350] CCT1=4680.222 gain=256x mode=<private> subsamples=120 rawLux=10.800 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:35 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.515270 (delta 0.974490 / thr 10.000000)
+Mar 11 23:17:35 ptpd[908] <Notice>:             PTPGroup | New uncollected groups present (0/255) -- notifying
+Mar 11 23:17:35 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:35 kernel(AppleHapticsSupportLEAP)[0] <Notice>: AppleHapticsSupportLEAP::maybeSendAKCIRequest sending AKCI request
+Mar 11 23:17:35 locationd[77] <Notice>: os_transaction created: (<private>) <private>
+Mar 11 23:17:35 locationd[77] <Notice>: os_transaction released: (<private>) <private>
+Mar 11 23:17:35 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I On Body Callback: OnBody: On Body, confidence: Confidence Level High
+Mar 11 23:17:35 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Audio State: Speaker, Proximity Sensor: Off, Motion State: On Body, Tx State: On -> Notifying Hand Detection: Default Hand
+Mar 11 23:17:35 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I On Body Callback: OnBody: On Body, confidence: Confidence Level High
+Mar 11 23:17:35 CommCenter(libBasebandManager.dylib)[101] <Notice>: #I Sending Grip State: 0x0
+Mar 11 23:17:35 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::sendOCPDataGated:821: Indicator: 0x10, CRC16: 0xa815, SeqNum: 99
+Mar 11 23:17:35 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x11)
+Mar 11 23:17:35 locationd[77] <Notice>: #Warning Input, <private>, time rolled back. Delta <private>, Previous Time <private>, Current Time <private>, Always Active <private>.
+Mar 11 23:17:35 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0xd)
+Mar 11 23:17:35 kernel(AppleSARService)[0] <Notice>: AppleSARSPMIHEB::register0Write:338: [HEB] Succeeded in triggering GPR0 (0x10)
+Mar 11 23:17:35 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:469: Received READY_TO_FILL interrupt
+Mar 11 23:17:35 kernel(AppleSARService)[0] <Notice>: AppleSARFusion::writeOCPReadySignalGated:483: Received OCP write ready signal from the baseband
+Mar 11 23:17:35 backboardd(ColourSensorFilterPlugin)[71] <Notice>: [ALS] ts=5952.846 lux=8.753<private> xy=(0.353 0.360) chs=[158 370 357 397 356] CCT1=4858.248 gain=256x mode=<private> subsamples=120 rawLux=11.037 nits=59 xTalk=[14 34 36 32 30] status=0x1B copyEvent=0
+Mar 11 23:17:35 backboardd(CoreBrightness)[71] <Notice>: Ammolite: Lux 8.752862 (delta 0.736898 / thr 10.000000)
+Mar 11 23:17:35 symptomsd(SymptomEvaluator)[143] <Notice>: Cell  PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:34.148 -0400 interval 1.198 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:35 symptomsd(SymptomEvaluator)[143] <Notice>: Wi-Fi PhysicalInterfaceSampler new entry IfSample from 2026-03-11 23:17:34.148 -0400 interval 1.198 rx-bytes 0 tx-bytes 0 rx-tput 0.000000 Mbps tx-tput 0.000000 Mbps
+Mar 11 23:17:35 ptpd[908] <Notice>:          Event Queue | Connected: YES Can Send Events: NO
+Mar 11 23:17:35 corespeechd(CoreSpeechFoundation)[173] <Notice>: -[CSAudioRecorder voiceControllerAudioCallback:forStream:buffer:] Received audio buffer 2560, heartbeat = 56100, streamID (1)
+Mar 11 23:17:35 locationd(LocationSupport)[77] <Notice>: #Idleness, Silo is being idled: CLGeoIPCountryTrackerSilo

@@ -1,0 +1,267 @@
+{
+  "environment": {
+    "timestamp": "2026-03-11T22:27:24",
+    "script": "dr_iphone.py",
+    "app": "Dr. iPhone",
+    "cwd": "/home/pc-10/repos/dr-iphone",
+    "script_root": "/home/pc-10/repos/dr-iphone",
+    "python_executable": "/home/pc-10/repos/dr-iphone/.venv/bin/python3",
+    "python_version": "3.12.3 (main, Mar  3 2026, 12:15:18) [GCC 13.3.0]",
+    "platform": "Linux-6.17.0-14-generic-x86_64-with-glibc2.39",
+    "system": "Linux",
+    "release": "6.17.0-14-generic",
+    "machine": "x86_64",
+    "user": "pc-10"
+  },
+  "tools": {
+    "python3": {
+      "present": true,
+      "which": "/home/pc-10/repos/dr-iphone/.venv/bin/python3",
+      "version": "3.12.3"
+    },
+    "idevice_id": {
+      "present": true,
+      "which": "/usr/bin/idevice_id",
+      "version_check": {
+        "present": true,
+        "version": "idevice_id 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "idevice_id",
+            "--version"
+          ],
+          "stdout": "idevice_id 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.002
+        }
+      }
+    },
+    "ideviceinfo": {
+      "present": true,
+      "which": "/usr/bin/ideviceinfo",
+      "version_check": {
+        "present": true,
+        "version": "ideviceinfo 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "ideviceinfo",
+            "--version"
+          ],
+          "stdout": "ideviceinfo 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.001
+        }
+      }
+    },
+    "idevicepair": {
+      "present": true,
+      "which": "/usr/bin/idevicepair",
+      "version_check": {
+        "present": true,
+        "version": "idevicepair 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "idevicepair",
+            "--version"
+          ],
+          "stdout": "idevicepair 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.003
+        }
+      }
+    },
+    "idevicediagnostics": {
+      "present": true,
+      "which": "/usr/bin/idevicediagnostics",
+      "version_check": {
+        "present": true,
+        "version": "idevicediagnostics 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "idevicediagnostics",
+            "--version"
+          ],
+          "stdout": "idevicediagnostics 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.004
+        }
+      }
+    },
+    "idevicesyslog": {
+      "present": true,
+      "which": "/usr/bin/idevicesyslog",
+      "version_check": {
+        "present": true,
+        "version": "idevicesyslog 1.3.0",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "idevicesyslog",
+            "--version"
+          ],
+          "stdout": "idevicesyslog 1.3.0\n",
+          "stderr": "",
+          "duration_s": 0.002
+        }
+      }
+    },
+    "ifuse": {
+      "present": true,
+      "which": "/usr/bin/ifuse",
+      "version_check": {
+        "present": true,
+        "version": "ifuse 1.1.3",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "ifuse",
+            "--version"
+          ],
+          "stdout": "",
+          "stderr": "ifuse 1.1.3\n",
+          "duration_s": 0.003
+        }
+      }
+    },
+    "usbmuxd": {
+      "present": true,
+      "which": "/usr/sbin/usbmuxd",
+      "version_check": {
+        "present": true,
+        "version": "usbmuxd 1.1.1",
+        "raw": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "usbmuxd",
+            "--version"
+          ],
+          "stdout": "usbmuxd 1.1.1\n",
+          "stderr": "",
+          "duration_s": 0.002
+        }
+      }
+    },
+    "pymobiledevice3_cli": {
+      "present": true,
+      "which": "/home/pc-10/repos/dr-iphone/.venv/bin/pymobiledevice3",
+      "version_check": {
+        "ok": true,
+        "returncode": 0,
+        "cmd": [
+          "pymobiledevice3",
+          "version"
+        ],
+        "stdout": "9.0.0\n",
+        "stderr": "",
+        "duration_s": 0.47
+      }
+    },
+    "pymobiledevice3_module": {
+      "present": true,
+      "version": "9.0.0",
+      "raw": {
+        "ok": true,
+        "returncode": 0,
+        "cmd": [
+          "/home/pc-10/repos/dr-iphone/.venv/bin/python3",
+          "-c",
+          "import importlib.metadata as m; print(m.version('pymobiledevice3'))"
+        ],
+        "stdout": "9.0.0\n",
+        "stderr": "",
+        "duration_s": 0.053
+      }
+    }
+  },
+  "usbmuxd": {
+    "socket_exists": false,
+    "socket_path_candidates": [
+      "/var/run/usbmuxd",
+      "/run/usbmuxd"
+    ],
+    "systemctl": {
+      "present": true,
+      "active": "inactive",
+      "enabled": "static",
+      "raw": {
+        "active": {
+          "ok": false,
+          "returncode": 3,
+          "cmd": [
+            "systemctl",
+            "is-active",
+            "usbmuxd.service"
+          ],
+          "stdout": "inactive\n",
+          "stderr": "",
+          "duration_s": 0.005
+        },
+        "enabled": {
+          "ok": true,
+          "returncode": 0,
+          "cmd": [
+            "systemctl",
+            "is-enabled",
+            "usbmuxd.service"
+          ],
+          "stdout": "static\n",
+          "stderr": "",
+          "duration_s": 0.006
+        }
+      }
+    },
+    "ps_grep": {
+      "ok": false,
+      "returncode": 1,
+      "cmd": [
+        "pgrep",
+        "-a",
+        "usbmuxd"
+      ],
+      "stdout": "",
+      "stderr": "",
+      "duration_s": 0.019
+    }
+  },
+  "discovery": {
+    "idevice_id": {
+      "ok": false,
+      "returncode": 255,
+      "cmd": [
+        "idevice_id",
+        "-l"
+      ],
+      "stdout": "",
+      "stderr": "ERROR: Unable to retrieve device list!\n",
+      "duration_s": 0.001
+    },
+    "udids": [],
+    "pymobiledevice3_usbmux_list": {
+      "ok": false,
+      "returncode": 1,
+      "cmd": [
+        "pymobiledevice3",
+        "usbmux",
+        "list"
+      ],
+      "stdout": "",
+      "stderr": "╭───────────── Traceback (most recent call last) ─────────────╮\n│ /home/pc-10/repos/dr-iphone/.venv/lib/python3.12/site-packa │\n│ ges/typer_injector/_inject.py:136 in wrapper                │\n│                                                             │\n│ /home/pc-10/repos/dr-iphone/.venv/lib/python3.12/site-packa │\n│ ges/typer_injector/_inject.py:107 in                        │\n│ invoke_with_dependencies                                    │\n│                                                             │\n│ /home/pc-10/repos/dr-iphone/.venv/lib/python3.12/site-packa │\n│ ges/pymobiledevice3/cli/cli_common.py:140 in wrapper        │\n│                                                             │\n│   137 │   def wrapper(*args: P.args, **kwargs: P.kwargs) -> │\n│   138 │   │   task = cli_loop.create_task(func(*args, **kwa │\n│   139 │   │   try:                                          │\n│ ❱ 140 │   │   │   return cli_loop.run_until_complete(task)  │\n│   141 │   │   except KeyboardInterrupt:                     │\n│   142 │   │   │   # Ensure graceful coroutine finalization  │\n│   143 │   │   │   # may report \"coroutine ignored Generator │\n│                                                             │\n│ /usr/lib/python3.12/asyncio/base_events.py:687 in           │\n│ run_until_complete                                          │\n│                                                             │\n│    684 │   │   if not future.done():                        │\n│    685 │   │   │   raise RuntimeError('Event loop stopped b │\n│    686 │   │                                                │\n│ ❱  687 │   │   return future.result()                       │\n│    688 │                                                    │\n│    689 │   def stop(self):                                  │\n│    690 │   │   \"\"\"Stop running the event loop.              │\n│                                                             │\n│ /home/pc-10/repos/dr-iphone/.venv/lib/python3.12/site-packa │\n│ ges/pymobiledevice3/cli/usbmux.py:114 in usbmux_list        │\n│                                                             │\n│   111 ) -> None:                                            │\n│   112 │   \"\"\"List devices known to usbmuxd (USB and Wi-Fi). │\n│   113 │   connected_devices = []                            │\n│ ❱ 114 │   for device in await usbmux.list_devices(usbmux_ad │\n│   115 │   │   udid = device.serial                          │\n│   116 │   │                                                 │\n│   117 │   │   if usb and not device.is_usb:                 │\n│                                                             │\n│ /home/pc-10/repos/dr-iphone/.venv/lib/python3.12/site-packa │\n│ ges/pymobiledevice3/usbmux.py:434 in list_devices           │\n│                                                             │\n│   431                                                       │\n│   432                                                       │\n│   433 async def list_devices(usbmux_address: Optional[str]  │\n│ ❱ 434 │   mux = await create_mux(usbmux_address=usbmux_addr │\n│   435 │   try:                                              │\n│   436 │   │   await mux.get_device_list(0.1)                │\n│   437 │   │   devices = mux.devices                         │\n│                                                             │\n│ /home/pc-10/repos/dr-iphone/.venv/lib/python3.12/site-packa │\n│ ges/pymobiledevice3/usbmux.py:430 in create_mux             │\n│                                                             │\n│   427                                                       │\n│   428                                                       │\n│   429 async def create_mux(usbmux_address: Optional[str] =  │\n│ ❱ 430 │   return await MuxConnection.create(usbmux_address= │\n│   431                                                       │\n│   432                                                       │\n│   433 async def list_devices(usbmux_address: Optional[str]  │\n│                                                             │\n│ /home/pc-10/repos/dr-iphone/.venv/lib/python3.12/site-packa │\n│ ges/pymobiledevice3/usbmux.py:182 in create                 │\n│                                                             │\n│   179 │                                                     │\n│   180 │   @staticmethod                                     │\n│   181 │   async def create(usbmux_address: Optional[str] =  │\n│ ❱ 182 │   │   sock = await MuxConnection.create_usbmux_sock │\n│   183 │   │   try:                                          │\n│   184 │   │   │   probe_message = usbmuxd_request.build({   │\n│   185 │   │   │   │   \"header\": {\"version\": usbmuxd_version │\n│                                                             │\n│ /home/pc-10/repos/dr-iphone/.venv/lib/python3.12/site-packa │\n│ ges/pymobiledevice3/usbmux.py:171 in create_usbmux_socket   │\n│                                                             │\n│   168 │   │   sock = socket.socket(family, socket.SOCK_STRE │\n│   169 │   │   sock.setblocking(False)                       │\n│   170 │   │   try:                                          │\n│ ❱ 171 │   │   │   await asyncio.get_running_loop().sock_con │\n│   172 │   │   except ConnectionRefusedError as e:           │\n│   173 │   │   │   sock.close()                              │\n│   174 │   │   │   raise ConnectionFailedToUsbmuxdError() fr │\n│                                                             │\n│ /usr/lib/python3.12/asyncio/selector_events.py:651 in       │\n│ sock_connect                                                │\n│                                                             │\n│    648 │   │   fut = self.create_future()                   │\n│    649 │   │   self._sock_connect(fut, sock, address)       │\n│    650 │   │   try:                                         │\n│ ❱  651 │   │   │   return await fut                         │\n│    652 │   │   finally:                                     │\n│    653 │   │   │   # Needed to break cycles when an excepti │\n│    654 │   │   │   fut = None                               │\n│                                                             │\n│ /usr/lib/python3.12/asyncio/selector_events.py:659 in       │\n│ _sock_connect                                               │\n│                                                             │\n│    656 │   def _sock_connect(self, fut, sock, address):     │\n│    657 │   │   fd = sock.fileno()                           │\n│    658 │   │   try:                                         │\n│ ❱  659 │   │   │   sock.connect(address)                    │\n│    660 │   │   except (BlockingIOError, InterruptedError):  │\n│    661 │   │   │   # Issue #23618: When the C function conn │\n│    662 │   │   │   # connection runs in background. We have │\n╰─────────────────────────────────────────────────────────────╯\nFileNotFoundError: [Errno 2] No such file or directory\n",
+      "duration_s": 0.731
+    }
+  },
+  "devices": [],
+  "ifuse_list_apps": null,
+  "pymobile_apps": null,
+  "syslog_sample": null
+}

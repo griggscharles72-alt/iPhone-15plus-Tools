@@ -1,0 +1,27 @@
+Dr. iPhone summary
+========================================================================
+Timestamp: 2026-03-11T22:27:24
+Host: Linux-6.17.0-14-generic-x86_64-with-glibc2.39
+
+Tool inventory
+------------------------------------------------------------------------
+[OK] python3                /home/pc-10/repos/dr-iphone/.venv/bin/python3 3.12.3
+[OK] idevice_id             /usr/bin/idevice_id
+[OK] ideviceinfo            /usr/bin/ideviceinfo
+[OK] idevicepair            /usr/bin/idevicepair
+[OK] idevicediagnostics     /usr/bin/idevicediagnostics
+[OK] idevicesyslog          /usr/bin/idevicesyslog
+[OK] ifuse                  /usr/bin/ifuse
+[OK] usbmuxd                /usr/sbin/usbmuxd
+[OK] pymobiledevice3_cli    /home/pc-10/repos/dr-iphone/.venv/bin/pymobiledevice3 9.0.0
+[OK] pymobiledevice3_module  9.0.0
+
+usbmuxd
+------------------------------------------------------------------------
+Socket exists: False
+systemctl active:  inactive
+systemctl enabled: static
+
+Device discovery
+------------------------------------------------------------------------
+UDIDs found: 0

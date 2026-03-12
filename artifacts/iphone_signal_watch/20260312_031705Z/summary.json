@@ -1,0 +1,22 @@
+{
+  "script": "iphone_signal_watch",
+  "start_time_utc": "2026-03-12T03:17:05Z",
+  "duration_requested_s": 30,
+  "interval_s": 5,
+  "syslog_seconds": 2,
+  "device_sessions": 1,
+  "connect_events": 1,
+  "disconnect_events": 0,
+  "battery_events": 1,
+  "syslog_samples": 5,
+  "paired_validations": 1,
+  "last_udid": "00008120-00040D990E2A601E",
+  "helper_inventory": {
+    "idevice_id": true,
+    "idevicepair": true,
+    "idevicediagnostics": true,
+    "idevicesyslog": true
+  },
+  "end_time_utc": "2026-03-12T03:17:40Z",
+  "artifact_dir": "/home/pc-10/repos/dr-iphone/artifacts/iphone_signal_watch/20260312_031705Z"
+}

@@ -416,12 +416,7 @@ dr-iphone/
 ├── iphone_observatory.py
 │
 ├── driphone_lib/
-│   ├── __init__.py
-│   ├── core.py
-│   ├── device.py
-│   ├── artifacts.py
-│   ├── state.py
-│   └── render.py
+│   └── plist_utils.py
 │
 ├── artifacts/
 ├── state/
@@ -465,58 +460,25 @@ Optional documentation, research notes, and design references may be stored here
 
 ⸻
 
-Internal Library Layer
+Internal Helper Layer
 
-As the repository grows, common functionality appears repeatedly across scripts:
-	•	logging
-	•	subprocess execution
-	•	device detection
-	•	artifact writing
-	•	timestamp helpers
-	•	JSON handling
-	•	latest artifact discovery
+The repository currently keeps most execution logic inside the stage scripts themselves.
 
-To avoid duplication, these helpers are centralized into an internal library:
+A small helper layer exists for plist parsing support used by the bench:
 
 driphone_lib/
 
-Library Components
+plist_utils.py
 
-core.py
-
-Provides shared generic utilities:
-	•	logging helpers
-	•	timestamp helpers
-	•	command execution wrappers
-	•	command existence checks
-
-device.py
-
-Provides iPhone-specific helpers:
-	•	device detection
-	•	UDID discovery
-	•	device information retrieval
-
-artifacts.py
-
-Provides artifact management helpers:
-	•	timestamped output directories
-	•	JSON/text writing
-	•	latest artifact discovery
-
-state.py
-
-Provides SQLite helpers for persistent state storage.
-
-render.py
-
-Provides reusable report formatting helpers.
+Utility helpers for parsing Apple plist/XML output safely.
 
 ⸻
 
-Why the Library Exists
+Why This Is Small Right Now
 
-Without a shared library, every script duplicates the same helper functions.
+The earlier library split was only partially started.
+The repository was normalized back to the real live structure:
+top-level scripts contain the working execution logic, and only live helpers remain in driphone_lib/.
 
 Centralizing shared functionality provides several advantages:
 	•	smaller script files

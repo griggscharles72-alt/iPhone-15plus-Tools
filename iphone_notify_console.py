@@ -316,14 +316,10 @@ def run_bounded_process(
 
 def candidate_notify_commands(udid: str) -> List[List[str]]:
     return [
-        ["pymobiledevice3", "notifications", "observe", "-u", udid],
-        ["pymobiledevice3", "notifications", "observe"],
-        ["pymobiledevice3", "notification", "observe", "-u", udid],
-        ["pymobiledevice3", "notification", "observe"],
-        ["pymobiledevice3", "developer", "notifications", "-u", udid],
-        ["pymobiledevice3", "developer", "notifications"],
-        ["pymobiledevice3", "developer", "notification", "-u", udid],
-        ["pymobiledevice3", "developer", "notification"],
+        ["pymobiledevice3", "developer", "accessibility", "notifications", "--udid", udid],
+        ["pymobiledevice3", "developer", "accessibility", "notifications"],
+        ["pymobiledevice3", "developer", "dvt", "notifications", "--udid", udid],
+        ["pymobiledevice3", "developer", "dvt", "notifications"],
     ]
 
 

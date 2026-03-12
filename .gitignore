@@ -4,3 +4,16 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .DS_Store
+
+# generated runtime output
+artifacts/*
+!artifacts/.gitkeep
+
+# local state
+state/*
+!state/.gitkeep
+
+# optional editor/system noise
+.vscode/
+*.swp
+*.swo

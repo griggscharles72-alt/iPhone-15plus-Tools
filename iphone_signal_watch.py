@@ -141,18 +141,54 @@ def validate_pairing(udid: str) -> dict[str, Any]:
     }
 
 
-def battery_info(udid: str) -> dict[str, str]:
+def battery_info(udid: str) -> dict[str, Any]:
     if not exists("idevicediagnostics"):
         return {}
-    result = run(["idevicediagnostics", "-u", udid, "battery"], timeout=20)
-    if not result["ok"]:
+
+    import plistlib
+
+    result = run(["idevicediagnostics", "-u", udid, "ioregentry", "AppleSmartBattery"], timeout=30)
+    if not result["ok"] or not result["stdout"]:
         return {}
-    data: dict[str, str] = {}
-    for line in result["stdout"].splitlines():
-        if ":" in line:
-            k, v = line.split(":", 1)
-            data[k.strip()] = v.strip()
-    return data
+
+    try:
+        payload = plistlib.loads(result["stdout"].encode("utf-8"))
+        io = payload.get("IORegistry", {})
+        battery_data = io.get("BatteryData", {})
+
+        parsed = {
+            "CurrentCapacity": io.get("CurrentCapacity"),
+            "IsCharging": io.get("IsCharging"),
+            "ExternalConnected": io.get("ExternalConnected"),
+            "FullyCharged": io.get("FullyCharged"),
+            "Voltage": io.get("Voltage"),
+            "Temperature": io.get("Temperature"),
+            "CycleCount": io.get("CycleCount"),
+            "NominalChargeCapacity": io.get("NominalChargeCapacity"),
+            "DesignCapacity": io.get("DesignCapacity"),
+            "BatteryHealthMetric": battery_data.get("BatteryHealthMetric"),
+            "RawStateOfCharge": battery_data.get("StateOfCharge"),
+            "InstantAmperage": io.get("InstantAmperage"),
+            "Amperage": io.get("Amperage"),
+            "AdapterWatts": ((io.get("AdapterDetails") or {}).get("Watts")),
+            "UpdateTime": io.get("UpdateTime"),
+        }
+
+        gas = run(["idevicediagnostics", "-u", udid, "diagnostics", "GasGauge"], timeout=20)
+        if gas["ok"] and gas["stdout"]:
+            try:
+                gas_payload = plistlib.loads(gas["stdout"].encode("utf-8"))
+                gasg = gas_payload.get("GasGauge", {})
+                parsed["GasGauge_CycleCount"] = gasg.get("CycleCount")
+                parsed["GasGauge_DesignCapacity"] = gasg.get("DesignCapacity")
+                parsed["GasGauge_FullChargeCapacity"] = gasg.get("FullChargeCapacity")
+                parsed["GasGauge_Status"] = gasg.get("Status")
+            except Exception:
+                pass
+
+        return {k: v for k, v in parsed.items() if v is not None}
+    except Exception:
+        return {}
 
 
 def capture_syslog(udid: str, seconds: int = 3, line_cap: int = 200) -> list[str]:

@@ -287,14 +287,14 @@ def run_bounded_process(
 def candidate_capture_commands(udid: str) -> List[List[str]]:
     """
     Probe likely pymobiledevice3 command forms.
-    Some versions differ. We try conservative text-first paths.
+    This installed CLI uses long-form device options.
     """
     return [
-        ["pymobiledevice3", "pcap", "-u", udid],
+        ["pymobiledevice3", "pcap", "--udid", udid],
         ["pymobiledevice3", "pcap"],
-        ["pymobiledevice3", "developer", "pcap", "-u", udid],
+        ["pymobiledevice3", "developer", "pcap", "--udid", udid],
         ["pymobiledevice3", "developer", "pcap"],
-        ["pymobiledevice3", "remote", "pcap", "-u", udid],
+        ["pymobiledevice3", "remote", "pcap", "--udid", udid],
         ["pymobiledevice3", "remote", "pcap"],
     ]
 

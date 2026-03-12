@@ -299,75 +299,6 @@ def candidate_capture_commands(udid: str) -> List[List[str]]:
     ]
 
 
-def try_capture_text(udid: str, outdir: Path, seconds: int) -> Dict[str, Any]:
-    stdout_path = outdir / "capture_stdout.txt"
-    stderr_path = outdir / "capture_stderr.txt"
-
-    if not command_exists("pymobiledevice3"):
-        safe_write_text(stderr_path, "pymobiledevice3 not found\n")
-        safe_write_text(stdout_path, "")
-        return {
-            "ok": False,
-            "method": "none",
-            "reason": "pymobiledevice3 not found",
-            "stdout_path": str(stdout_path),
-            "stderr_path": str(stderr_path),
-        }
-
-    attempts: List[Dict[str, Any]] = []
-    for cmd in candidate_capture_commands(udid):
-        version_probe = run_cmd(cmd + ["--help"], timeout=10)
-        attempts.append({
-            "probe_cmd": cmd + ["--help"],
-            "probe_ok": version_probe["ok"],
-            "probe_stderr": clean_text(version_probe["stderr"]),
-            "probe_stdout_head": clean_text(version_probe["stdout"])[:300],
-        })
-
-        # Even if --help fails, some CLI layouts still run. Try bounded run.
-        result = run_bounded_process(cmd, seconds, stdout_path, stderr_path)
-        if result.get("ok"):
-            result["method"] = "pymobiledevice3_text_capture"
-            result["attempts"] = attempts
-            return result
-
-    return {
-        "ok": False,
-        "method": "none",
-        "reason": "No capture command path succeeded",
-        "attempts": attempts,
-        "stdout_path": str(stdout_path),
-        "stderr_path": str(stderr_path),
-    }
-
-
-# ============================================================================
-# PARSING / SUMMARIZATION
-# ============================================================================
-
-DOMAIN_RE = re.compile(
-    r"\b(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\b"
-)
-
-IP_RE = re.compile(
-    r"\b(?:\d{1,3}\.){3}\d{1,3}\b"
-)
-
-PROTO_HINTS = [
-    "tcp",
-    "udp",
-    "dns",
-    "tls",
-    "ssl",
-    "http",
-    "https",
-    "quic",
-    "mdns",
-    "icmp",
-    "arp",
-    "ntp",
-]
-
 
 def read_text_lines(path: Path, max_lines: int = DEFAULT_MAX_LINES) -> List[str]:
     if not path.exists():
@@ -381,80 +312,111 @@ def read_text_lines(path: Path, max_lines: int = DEFAULT_MAX_LINES) -> List[str]
     return lines
 
 
-def summarize_text_capture(lines: List[str]) -> Dict[str, Any]:
-    domains = Counter()
-    ips = Counter()
-    protos = Counter()
+def file_info(path: Path) -> Dict[str, Any]:
+    return {
+        "path": str(path),
+        "exists": path.exists(),
+        "size_bytes": path.stat().st_size if path.exists() else 0,
+    }
 
+
+def extract_dns_candidates(lines: List[str]) -> List[str]:
+    seen = set()
+    out: List[str] = []
     for line in lines:
         low = line.lower()
+        if "dns" in low or "query" in low or "answer" in low:
+            item = line.strip()
+            if item and item not in seen:
+                seen.add(item)
+                out.append(item)
+    return out
+def extract_endpoint_candidates(lines: List[str]) -> List[str]:
+    import re
+    seen = set()
+    out: List[str] = []
+    pattern = re.compile(r'((?:\d{1,3}\.){3}\d{1,3}(?::\d+)?)')
+    for line in lines:
+        for match in pattern.findall(line):
+            if match not in seen:
+                seen.add(match)
+                out.append(match)
+    return out
+def extract_protocol_candidates(lines: List[str]) -> List[str]:
+    seen = set()
+    out: List[str] = []
+    protocols = ["tcp", "udp", "icmp", "tls", "http", "https", "dns", "quic"]
+    for line in lines:
+        low = line.lower()
+        for proto in protocols:
+            if proto in low and proto not in seen:
+                seen.add(proto)
+                out.append(proto)
+    return out
 
-        for match in DOMAIN_RE.findall(line):
-            domains[match] += 1
+def try_capture_text(udid: str, outdir: Path, seconds: int) -> Dict[str, Any]:
+    stdout_path = outdir / "capture_stdout.txt"
+    stderr_path = outdir / "capture_stderr.txt"
 
-        for match in IP_RE.findall(line):
-            ips[match] += 1
+    attempts: List[Dict[str, Any]] = []
 
-        for proto in PROTO_HINTS:
-            if proto in low:
-                protos[proto] += 1
-
-    return {
-        "line_count": len(lines),
-        "dns_candidates": [{"value": k, "count": v} for k, v in domains.most_common(50)],
-        "endpoint_candidates": [{"value": k, "count": v} for k, v in ips.most_common(50)],
-        "protocol_candidates": [{"value": k, "count": v} for k, v in protos.most_common(50)],
-    }
-
-
-def tshark_text_summary(text_path: Path, outdir: Path) -> Dict[str, Any]:
-    """
-    Best-effort text post-processing through tshark is only possible for actual pcap files.
-    Since P1 is conservative and may only get text output, we store a note here.
-    """
-    note = (
-        "P1 currently captures and summarizes text output from pymobiledevice3 capture paths. "
-        "A later P2/P3 version can be extended to emit real .pcap files and hand them to tshark "
-        "for packet-level parsing."
+    probe = run_cmd(
+        ["pymobiledevice3", "pcap", "--udid", udid, "--help"],
+        timeout=12,
     )
-    safe_write_text(outdir / "notes.txt", note + "\n")
-    return {
-        "ok": command_exists("tshark"),
-        "mode": "text_only_note",
-        "note": note,
-    }
+    attempts.append(
+        {
+            "probe_cmd": ["pymobiledevice3", "pcap", "--udid", udid, "--help"],
+            "probe_ok": probe["ok"],
+            "probe_stderr": clean_text(probe.get("stderr", "")),
+            "probe_stdout_head": clean_text(probe.get("stdout", ""))[:400],
+        }
+    )
 
+    cmd = ["pymobiledevice3", "pcap", "--udid", udid]
+    started = time.time()
 
-# ============================================================================
-# SUMMARY RENDER
-# ============================================================================
+    try:
+        with stdout_path.open("w", encoding="utf-8") as out_fp, stderr_path.open("w", encoding="utf-8") as err_fp:
+            proc = subprocess.Popen(
+                cmd,
+                cwd=str(script_root()),
+                stdout=out_fp,
+                stderr=err_fp,
+                text=True,
+            )
+            try:
+                proc.wait(timeout=seconds)
+                terminated = False
+            except subprocess.TimeoutExpired:
+                proc.terminate()
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+                    proc.wait(timeout=5)
+                terminated = True
 
-def build_summary(
-    args: argparse.Namespace,
-    tools: Dict[str, Any],
-    device_info: Dict[str, str],
-    capture_result: Dict[str, Any],
-    text_summary: Dict[str, Any],
-    tshark_summary: Dict[str, Any],
-) -> Dict[str, Any]:
-    return {
-        "timestamp": now_iso(),
-        "script": SCRIPT_NAME,
-        "app": APP_NAME,
-        "stage": STAGE_NAME,
-        "capture_seconds": args.seconds,
-        "tools": tools,
-        "device": {
-            "DeviceName": device_info.get("DeviceName", ""),
-            "ProductType": device_info.get("ProductType", ""),
-            "ProductVersion": device_info.get("ProductVersion", ""),
-            "BuildVersion": device_info.get("BuildVersion", ""),
-            "UniqueDeviceID": device_info.get("UniqueDeviceID", ""),
-        },
-        "capture_result": capture_result,
-        "text_summary": text_summary,
-        "tshark_summary": tshark_summary,
-    }
+        return {
+            "ok": True,
+            "cmd": cmd,
+            "duration_s": round(time.time() - started, 3),
+            "terminated": terminated,
+            "returncode": proc.returncode,
+            "method": "pymobiledevice3_text_capture",
+            "attempts": attempts,
+        }
+    except Exception as exc:
+        return {
+            "ok": False,
+            "cmd": cmd,
+            "duration_s": round(time.time() - started, 3),
+            "terminated": False,
+            "returncode": None,
+            "method": "pymobiledevice3_text_capture",
+            "error": f"{type(exc).__name__}: {exc}",
+            "attempts": attempts,
+        }
 
 
 # ============================================================================
@@ -469,8 +431,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--seconds",
         type=int,
-        default=DEFAULT_CAPTURE_SECONDS,
-        help="Bounded capture duration in seconds",
+        default=20,
+        help="Capture duration in seconds.",
     )
     parser.add_argument(
         "--output-dir",
@@ -500,7 +462,10 @@ def main() -> int:
             "tools": tools,
         }
         safe_write_json(outdir / "summary.json", summary)
-        safe_write_text(outdir / "notes.txt", "No device detected. Check cable, trust prompt, and usbmuxd.\n")
+        safe_write_text(
+            outdir / "notes.txt",
+            "No device detected. Check cable, trust prompt, and usbmuxd.\n",
+        )
         log("No device detected")
         log(f"Artifacts written to {outdir}")
         return 1
@@ -508,42 +473,98 @@ def main() -> int:
     device_info = get_device_info(udid)
     log(f"Device detected: {device_info.get('DeviceName', udid)}")
 
-    # Attempt bounded text capture
     log(f"Starting bounded capture for {args.seconds}s")
     capture_result = try_capture_text(udid, outdir, args.seconds)
 
     stdout_path = outdir / "capture_stdout.txt"
+    stderr_path = outdir / "capture_stderr.txt"
+    pcap_path = outdir / "iphone_capture.pcap"
+
     lines = read_text_lines(stdout_path, max_lines=DEFAULT_MAX_LINES)
     if lines:
         safe_write_text(outdir / "pcap_text.txt", "\n".join(lines) + "\n")
 
-    text_summary = summarize_text_capture(lines)
-    tshark_summary = tshark_text_summary(stdout_path, outdir)
+    dns_candidates = extract_dns_candidates(lines)
+    endpoint_candidates = extract_endpoint_candidates(lines)
+    protocol_candidates = extract_protocol_candidates(lines)
 
-    safe_write_json(outdir / "dns_candidates.json", text_summary["dns_candidates"])
-    safe_write_json(outdir / "endpoint_candidates.json", text_summary["endpoint_candidates"])
-    safe_write_json(outdir / "protocol_candidates.json", text_summary["protocol_candidates"])
+    stdout_info = file_info(stdout_path)
+    stderr_info = file_info(stderr_path)
+    pcap_info = file_info(pcap_path)
 
-    summary = build_summary(
-        args=args,
-        tools=tools,
-        device_info=device_info,
-        capture_result=capture_result,
-        text_summary=text_summary,
-        tshark_summary=tshark_summary,
-    )
+    safe_write_json(outdir / "dns_candidates.json", dns_candidates)
+    safe_write_json(outdir / "endpoint_candidates.json", endpoint_candidates)
+    safe_write_json(outdir / "protocol_candidates.json", protocol_candidates)
+
+    capture_truth = {
+        "mode": "text_capture",
+        "stdout_file": stdout_info,
+        "stderr_file": stderr_info,
+        "pcap_file": pcap_info,
+        "stdout_line_count": len(lines),
+        "has_text_output": len(lines) > 0,
+        "has_pcap_file": pcap_info["exists"],
+        "pcap_nonzero": pcap_info["size_bytes"] > 0,
+        "packet_capture_status": "",
+    }
+
+    if pcap_info["exists"] and pcap_info["size_bytes"] > 0:
+        capture_truth["packet_capture_status"] = "pcap_present_nonzero"
+    elif pcap_info["exists"] and pcap_info["size_bytes"] == 0:
+        capture_truth["packet_capture_status"] = "pcap_present_zero_bytes"
+    elif len(lines) > 0:
+        capture_truth["packet_capture_status"] = "text_output_only"
+    else:
+        capture_truth["packet_capture_status"] = "no_packets_observed"
+
+    notes = [
+        "This version is passive/read-only.",
+        "It probes likely pymobiledevice3 capture command paths.",
+        "Capture truth is reported explicitly so empty runs are distinguishable from real packet capture.",
+    ]
+    safe_write_text(outdir / "notes.txt", "\n".join(notes) + "\n")
+
+    summary = {
+        "timestamp": now_iso(),
+        "script": SCRIPT_NAME,
+        "app": APP_NAME,
+        "stage": STAGE_NAME,
+        "capture_seconds": args.seconds,
+        "tools": tools,
+        "device": {
+            "DeviceName": device_info.get("DeviceName", ""),
+            "ProductType": device_info.get("ProductType", ""),
+            "ProductVersion": device_info.get("ProductVersion", ""),
+            "BuildVersion": device_info.get("BuildVersion", ""),
+            "UniqueDeviceID": device_info.get("UniqueDeviceID", ""),
+        },
+        "capture_result": capture_result,
+        "capture_truth": capture_truth,
+        "text_summary": {
+            "line_count": len(lines),
+            "dns_candidates": dns_candidates,
+            "endpoint_candidates": endpoint_candidates,
+            "protocol_candidates": protocol_candidates,
+        },
+        "tshark_summary": {
+            "ok": True,
+            "mode": "text_only_note",
+            "note": "This stage now reports exact capture truth. A later version can promote real packet parsing when non-zero PCAP artifacts exist."
+        }
+    }
     safe_write_json(outdir / "summary.json", summary)
 
-    log(f"Lines captured: {text_summary['line_count']}")
-    log(f"DNS candidates: {len(text_summary['dns_candidates'])}")
-    log(f"Endpoint candidates: {len(text_summary['endpoint_candidates'])}")
-    log(f"Protocol candidates: {len(text_summary['protocol_candidates'])}")
+    log(f"Lines captured: {len(lines)}")
+    log(f"DNS candidates: {len(dns_candidates)}")
+    log(f"Endpoint candidates: {len(endpoint_candidates)}")
+    log(f"Protocol candidates: {len(protocol_candidates)}")
     log(f"Artifacts written to {outdir}")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
 
 # ============================================================================

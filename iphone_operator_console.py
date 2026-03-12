@@ -159,7 +159,11 @@ def latest_timestamp_dirs(base: Path) -> List[Path]:
     if not base.exists() or not base.is_dir():
         return []
     dirs = [p for p in base.iterdir() if p.is_dir()]
-    return sorted(dirs, key=lambda p: p.name, reverse=True)
+    return sorted(
+        dirs,
+        key=lambda p: (p.stat().st_mtime, p.name),
+        reverse=True,
+    )
 
 
 def newest_run_dir(base: Path) -> Optional[Path]:
@@ -315,6 +319,7 @@ def render_status_text(
     lines.append("Common commands")
     lines.append("-" * 72)
     lines.append("./iphone_operator_console.py bench")
+    lines.append("./iphone_operator_console.py bench-plus")
     lines.append("./iphone_operator_console.py status")
     lines.append("./iphone_operator_console.py run observatory")
     lines.append("./iphone_operator_console.py run doctor")
@@ -434,6 +439,7 @@ def parse_args() -> argparse.Namespace:
     sub.add_parser("db-status", help="Show SQLite state DB status")
     sub.add_parser("list-scripts", help="List managed scripts")
     sub.add_parser("bench", help="Run the primary daily bench pass (observatory)")
+    sub.add_parser("bench-plus", help="Run observatory with optional pcap and notify layers")
     sub.add_parser("run-all-safe", help="Run a conservative safe script bundle")
 
     run_p = sub.add_parser("run", help="Run a managed child script")
@@ -490,6 +496,24 @@ def main() -> int:
 
     elif args.command == "bench":
         result = run_child_script(root, "observatory")
+        child_runs.append(result)
+
+        print(result.get("stdout", ""), end="")
+        if result.get("stderr"):
+            print(result["stderr"], file=sys.stderr, end="")
+
+        safe_write_json(outdir / "child_runs.json", child_runs)
+
+        artifacts = artifact_status(root)
+        db = db_status(root)
+        udid = detect_device_udid()
+
+    elif args.command == "bench-plus":
+        result = run_child_script(
+            root,
+            "observatory",
+            extra_args=["--include-pcap", "--include-notify"],
+        )
         child_runs.append(result)
 
         print(result.get("stdout", ""), end="")
@@ -586,6 +610,9 @@ if __name__ == "__main__":
 #
 # Bench:
 #   ./iphone_operator_console.py bench
+#
+# Bench plus:
+#   ./iphone_operator_console.py bench-plus
 #
 # Status:
 #   ./iphone_operator_console.py status

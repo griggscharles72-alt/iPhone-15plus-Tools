@@ -166,7 +166,11 @@ def latest_timestamp_dirs(base: Path) -> List[Path]:
     if not base.exists() or not base.is_dir():
         return []
     dirs = [p for p in base.iterdir() if p.is_dir()]
-    return sorted(dirs, key=lambda p: p.name, reverse=True)
+    return sorted(
+        dirs,
+        key=lambda p: (p.stat().st_mtime, p.name),
+        reverse=True,
+    )
 
 
 def newest_run_dir(base: Path) -> Optional[Path]:

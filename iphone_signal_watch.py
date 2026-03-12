@@ -1,260 +1,399 @@
 #!/usr/bin/env python3
 """
-README
-======
-
-Filename:
-    iphone_signal_watch.py
-
-Project:
-    Dr. iPhone
-
-Stage:
-    02 — Signal Watch
+===============================================================================
+iphone_signal_watch.py
+Dr. iPhone — Stage 02 Signal Watch
 
 Purpose
--------
-
-Continuously observe an attached iPhone and capture live signals
-including connection state, battery state, and syslog events.
-
-This script provides timeline visibility into device behavior.
-
-Signals observed:
-
-    • device connect / disconnect
-    • battery state changes
-    • charging state
-    • short syslog capture samples
-    • repeated crash indicators
-    • device identity
+- monitor connected iPhone state over time
+- detect connect/disconnect events
+- sample battery state
+- capture bounded syslog windows
+- build a structured timeline
+- write timestamped artifacts
 
 Design
-------
-
-    • Safe by default
-    • Read-only
-    • No device modifications
-    • Continue on failure
-    • Structured logging
-    • Repo-friendly
-
-Outputs
--------
-
-Creates timestamped directory:
-
-    artifacts/iphone_signal_watch/
-
-Logs produced:
-
-    device_events.log
-    battery.log
-    syslog_sample.log
-    summary.json
-
-Dependencies
-------------
-
-Recommended tools:
-
-    python3
-    usbmuxd
-    libimobiledevice-utils
-    pymobiledevice3
-
-This script will continue even if some tools are missing.
-
+- safe by default
+- read-only
+- location-independent
+- continue-on-failure
+- bounded test mode supported
+===============================================================================
 """
 
-import subprocess
-import time
+from __future__ import annotations
+
+import argparse
 import json
 import shutil
+import subprocess
+import time
+from datetime import datetime, timezone
 from pathlib import Path
-from datetime import datetime
+from typing import Any
 
-# --------------------------------------------------
-# helpers
-# --------------------------------------------------
+SCRIPT_NAME = "iphone_signal_watch"
+DEFAULT_INTERVAL = 5
+DEFAULT_SYSLOG_SECONDS = 3
+DEFAULT_DURATION = 60
 
-def log(msg):
+
+# ============================================================================
+# PATHS / TIME
+# ============================================================================
+
+def repo_root() -> Path:
+    return Path(__file__).resolve().parent
+
+
+def utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def now_iso() -> str:
+    return utc_now().strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def stamp() -> str:
+    return utc_now().strftime("%Y%m%d_%H%M%SZ")
+
+
+def make_out_dir() -> Path:
+    out = repo_root() / "artifacts" / SCRIPT_NAME / stamp()
+    out.mkdir(parents=True, exist_ok=True)
+    return out
+
+
+# ============================================================================
+# IO HELPERS
+# ============================================================================
+
+def log(msg: str) -> None:
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
 
-def run(cmd, timeout=20):
-    try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-        return r.stdout.strip()
-    except Exception:
-        return ""
 
-def exists(cmd):
+def append_text(path: Path, text: str) -> None:
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(text)
+
+
+def append_jsonl(path: Path, obj: dict[str, Any]) -> None:
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(obj, ensure_ascii=False) + "\n")
+
+
+def write_json(path: Path, obj: dict[str, Any]) -> None:
+    path.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+# ============================================================================
+# COMMAND HELPERS
+# ============================================================================
+
+def exists(cmd: str) -> bool:
     return shutil.which(cmd) is not None
 
-# --------------------------------------------------
-# environment
-# --------------------------------------------------
 
-BASE = Path("artifacts/iphone_signal_watch")
-STAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
-OUT = BASE / STAMP
-OUT.mkdir(parents=True, exist_ok=True)
+def run(cmd: list[str], timeout: int = 20) -> dict[str, Any]:
+    started = time.time()
+    try:
+        proc = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            check=False,
+        )
+        return {
+            "ok": proc.returncode == 0,
+            "returncode": proc.returncode,
+            "stdout": (proc.stdout or "").strip(),
+            "stderr": (proc.stderr or "").strip(),
+            "duration_s": round(time.time() - started, 3),
+            "cmd": cmd,
+        }
+    except subprocess.TimeoutExpired:
+        return {
+            "ok": False,
+            "returncode": 124,
+            "stdout": "",
+            "stderr": f"timeout after {timeout}s",
+            "duration_s": round(time.time() - started, 3),
+            "cmd": cmd,
+        }
+    except Exception as exc:
+        return {
+            "ok": False,
+            "returncode": 1,
+            "stdout": "",
+            "stderr": f"{type(exc).__name__}: {exc}",
+            "duration_s": round(time.time() - started, 3),
+            "cmd": cmd,
+        }
 
-DEVICE_LOG = OUT / "device_events.log"
-BATTERY_LOG = OUT / "battery.log"
-SYSLOG_LOG = OUT / "syslog_sample.log"
-SUMMARY = OUT / "summary.json"
 
-# --------------------------------------------------
-# device detection
-# --------------------------------------------------
+# ============================================================================
+# DEVICE HELPERS
+# ============================================================================
 
-def get_devices():
+def get_devices() -> list[str]:
     if not exists("idevice_id"):
         return []
-    out = run(["idevice_id", "-l"])
-    return [x.strip() for x in out.splitlines() if x.strip()]
+    result = run(["idevice_id", "-l"], timeout=15)
+    if not result["ok"]:
+        return []
+    return [line.strip() for line in result["stdout"].splitlines() if line.strip()]
 
-# --------------------------------------------------
-# battery
-# --------------------------------------------------
 
-def battery_info(udid):
+def validate_pairing(udid: str) -> dict[str, Any]:
+    if not exists("idevicepair"):
+        return {"ok": False, "paired": False, "reason": "idevicepair missing"}
+    result = run(["idevicepair", "-u", udid, "validate"], timeout=20)
+    text = f"{result['stdout']} {result['stderr']}".lower()
+    return {
+        "ok": result["ok"],
+        "paired": result["ok"] or "success" in text or "validated pairing" in text,
+        "raw": result,
+    }
+
+
+def battery_info(udid: str) -> dict[str, str]:
     if not exists("idevicediagnostics"):
         return {}
-    out = run(["idevicediagnostics", "-u", udid, "battery"])
-    data = {}
-    for line in out.splitlines():
+    result = run(["idevicediagnostics", "-u", udid, "battery"], timeout=20)
+    if not result["ok"]:
+        return {}
+
+    data: dict[str, str] = {}
+    for line in result["stdout"].splitlines():
         if ":" in line:
-            k,v = line.split(":",1)
+            k, v = line.split(":", 1)
             data[k.strip()] = v.strip()
     return data
 
-# --------------------------------------------------
-# syslog sample
-# --------------------------------------------------
 
-def capture_syslog(udid, seconds=4):
-
+def capture_syslog(udid: str, seconds: int = 3, line_cap: int = 200) -> list[str]:
     if not exists("idevicesyslog"):
         return []
 
     try:
-
         proc = subprocess.Popen(
             ["idevicesyslog", "-u", udid],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True
+            text=True,
         )
-
         time.sleep(seconds)
-
         proc.terminate()
 
-        out,_ = proc.communicate(timeout=3)
+        try:
+            out, _ = proc.communicate(timeout=3)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            out, _ = proc.communicate()
 
-        return out.splitlines()[:200]
-
+        lines = [line.rstrip() for line in (out or "").splitlines()]
+        return lines[:line_cap]
     except Exception:
         return []
 
-# --------------------------------------------------
-# monitoring loop
-# --------------------------------------------------
 
-state = {
-    "device_connected": False,
-    "udid": None,
-    "battery": None
-}
+def syslog_tags(lines: list[str]) -> dict[str, int]:
+    tags = {
+        "crash": 0,
+        "error": 0,
+        "warning": 0,
+        "thermal": 0,
+        "battery": 0,
+        "springboard": 0,
+        "runningboard": 0,
+        "assertion": 0,
+    }
+    for line in lines:
+        low = line.lower()
+        if "crash" in low:
+            tags["crash"] += 1
+        if "error" in low:
+            tags["error"] += 1
+        if "warning" in low:
+            tags["warning"] += 1
+        if "thermal" in low:
+            tags["thermal"] += 1
+        if "battery" in low:
+            tags["battery"] += 1
+        if "springboard" in low:
+            tags["springboard"] += 1
+        if "runningboard" in low:
+            tags["runningboard"] += 1
+        if "assertion" in low:
+            tags["assertion"] += 1
+    return tags
 
-summary = {
-    "start_time": datetime.now().isoformat(),
-    "device_sessions": 0,
-    "battery_events": 0,
-    "syslog_samples": 0
-}
 
-log("iPhone Signal Watch starting")
+# ============================================================================
+# MAIN
+# ============================================================================
 
-try:
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Monitor iPhone live signals from Linux")
+    parser.add_argument("--duration", type=int, default=DEFAULT_DURATION, help="Total run duration in seconds")
+    parser.add_argument("--interval", type=int, default=DEFAULT_INTERVAL, help="Polling interval in seconds")
+    parser.add_argument("--syslog-seconds", type=int, default=DEFAULT_SYSLOG_SECONDS, help="Seconds per syslog sample")
+    return parser.parse_args()
 
-    while True:
 
-        devices = get_devices()
+def main() -> int:
+    args = parse_args()
+    out_dir = make_out_dir()
 
-        # device connected
-        if devices and not state["device_connected"]:
+    device_log = out_dir / "device_events.log"
+    battery_log = out_dir / "battery.log"
+    syslog_log = out_dir / "syslog_sample.log"
+    timeline_jsonl = out_dir / "timeline.jsonl"
+    summary_json = out_dir / "summary.json"
 
-            udid = devices[0]
+    summary: dict[str, Any] = {
+        "script": SCRIPT_NAME,
+        "start_time_utc": now_iso(),
+        "duration_requested_s": args.duration,
+        "interval_s": args.interval,
+        "syslog_seconds": args.syslog_seconds,
+        "device_sessions": 0,
+        "connect_events": 0,
+        "disconnect_events": 0,
+        "battery_events": 0,
+        "syslog_samples": 0,
+        "paired_validations": 0,
+        "last_udid": None,
+        "helper_inventory": {
+            "idevice_id": exists("idevice_id"),
+            "idevicepair": exists("idevicepair"),
+            "idevicediagnostics": exists("idevicediagnostics"),
+            "idevicesyslog": exists("idevicesyslog"),
+        },
+    }
 
-            state["device_connected"] = True
-            state["udid"] = udid
+    state: dict[str, Any] = {
+        "device_connected": False,
+        "udid": None,
+        "battery": None,
+    }
 
-            summary["device_sessions"] += 1
+    log(f"{SCRIPT_NAME} starting")
+    log(f"output directory: {out_dir}")
 
-            msg = f"{datetime.now()} device connected {udid}\n"
+    started = time.time()
 
-            DEVICE_LOG.write_text(DEVICE_LOG.read_text() + msg if DEVICE_LOG.exists() else msg)
+    try:
+        while True:
+            elapsed = time.time() - started
+            if elapsed >= args.duration:
+                log("duration reached")
+                break
 
-            log("device connected")
+            devices = get_devices()
 
-        # device disconnected
-        if not devices and state["device_connected"]:
+            if devices and not state["device_connected"]:
+                udid = devices[0]
+                state["device_connected"] = True
+                state["udid"] = udid
+                state["battery"] = None
 
-            msg = f"{datetime.now()} device disconnected\n"
+                summary["device_sessions"] += 1
+                summary["connect_events"] += 1
+                summary["last_udid"] = udid
 
-            DEVICE_LOG.write_text(DEVICE_LOG.read_text() + msg)
+                pairing = validate_pairing(udid)
+                if pairing.get("paired"):
+                    summary["paired_validations"] += 1
 
-            log("device disconnected")
+                msg = f"{now_iso()} device connected {udid}\n"
+                append_text(device_log, msg)
+                append_jsonl(timeline_jsonl, {
+                    "ts": now_iso(),
+                    "event": "device_connected",
+                    "udid": udid,
+                    "pair_valid": pairing.get("paired"),
+                })
+                log(f"device connected: {udid}")
 
-            state["device_connected"] = False
-            state["udid"] = None
+            elif not devices and state["device_connected"]:
+                append_text(device_log, f"{now_iso()} device disconnected\n")
+                append_jsonl(timeline_jsonl, {
+                    "ts": now_iso(),
+                    "event": "device_disconnected",
+                    "udid": state["udid"],
+                })
+                log("device disconnected")
 
-        # if connected observe signals
-        if state["device_connected"]:
+                summary["disconnect_events"] += 1
+                state["device_connected"] = False
+                state["udid"] = None
+                state["battery"] = None
 
-            udid = state["udid"]
+            if state["device_connected"] and state["udid"]:
+                udid = state["udid"]
 
-            # battery
-            batt = battery_info(udid)
+                batt = battery_info(udid)
+                if batt and batt != state["battery"]:
+                    state["battery"] = batt
+                    summary["battery_events"] += 1
 
-            if batt and batt != state["battery"]:
+                    append_text(battery_log, f"{now_iso()} {json.dumps(batt, ensure_ascii=False)}\n")
+                    append_jsonl(timeline_jsonl, {
+                        "ts": now_iso(),
+                        "event": "battery_change",
+                        "udid": udid,
+                        "battery": batt,
+                    })
+                    log("battery change")
 
-                summary["battery_events"] += 1
-                state["battery"] = batt
+                lines = capture_syslog(udid, seconds=args.syslog_seconds)
+                if lines:
+                    summary["syslog_samples"] += 1
+                    tags = syslog_tags(lines)
 
-                msg = f"{datetime.now()} {json.dumps(batt)}\n"
+                    append_text(
+                        syslog_log,
+                        f"\n===== {now_iso()} udid={udid} =====\n" + "\n".join(lines) + "\n",
+                    )
+                    append_jsonl(timeline_jsonl, {
+                        "ts": now_iso(),
+                        "event": "syslog_sample",
+                        "udid": udid,
+                        "line_count": len(lines),
+                        "tags": tags,
+                    })
+                    log("syslog sample")
 
-                BATTERY_LOG.write_text(BATTERY_LOG.read_text() + msg if BATTERY_LOG.exists() else msg)
+            time.sleep(args.interval)
 
-                log("battery change")
+    except KeyboardInterrupt:
+        log("keyboard interrupt received")
 
-            # syslog sample
-            lines = capture_syslog(udid,3)
+    summary["end_time_utc"] = now_iso()
+    summary["artifact_dir"] = str(out_dir)
 
-            if lines:
+    write_json(summary_json, summary)
 
-                summary["syslog_samples"] += 1
+    log(f"summary written: {summary_json}")
+    log(f"{SCRIPT_NAME} complete")
+    return 0
 
-                block = "\n".join(lines) + "\n"
 
-                SYSLOG_LOG.write_text(SYSLOG_LOG.read_text() + block if SYSLOG_LOG.exists() else block)
+if __name__ == "__main__":
+    raise SystemExit(main())
 
-                log("syslog sample")
 
-        time.sleep(5)
-
-except KeyboardInterrupt:
-    log("stopping monitor")
-
-# --------------------------------------------------
-# summary
-# --------------------------------------------------
-
-summary["end_time"] = datetime.now().isoformat()
-
-SUMMARY.write_text(json.dumps(summary,indent=2))
-
-log(f"logs written to {OUT}")
+# ------------------------------------------------------------------------------
+# INSTRUCTIONS
+#
+# FILE NAME
+# iphone_signal_watch.py
+#
+# RUN FROM REPO ROOT
+# cd "$HOME/repos/dr-iphone" && . .venv/bin/activate && python3 iphone_signal_watch.py
+#
+# SHORT TEST
+# cd "$HOME/repos/dr-iphone" && . .venv/bin/activate && python3 iphone_signal_watch.py --duration 30 --interval 5 --syslog-seconds 2
+# ------------------------------------------------------------------------------

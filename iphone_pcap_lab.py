@@ -320,6 +320,160 @@ def file_info(path: Path) -> Dict[str, Any]:
     }
 
 
+
+def split_packet_blocks(lines: List[str]) -> List[Dict[str, Any]]:
+    blocks: List[Dict[str, Any]] = []
+    current: Optional[Dict[str, Any]] = None
+
+    header_re = re.compile(
+        r'^(?P<ts>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+): '
+        r'Process (?P<proc>.+?) \((?P<pid>\d+)\), '
+        r'Interface: (?P<iface>.+?), Family: (?P<family>\S+)$'
+    )
+    hex_re = re.compile(r'^[0-9A-Fa-f]{8}:\s+(.+)$')
+
+    for line in lines:
+        m = header_re.match(line.strip())
+        if m:
+            if current is not None:
+                blocks.append(current)
+            current = {
+                "timestamp": m.group("ts"),
+                "process": m.group("proc"),
+                "pid": int(m.group("pid")),
+                "interface": m.group("iface"),
+                "family": m.group("family"),
+                "hex_lines": [],
+            }
+            continue
+
+        hm = hex_re.match(line.rstrip())
+        if hm and current is not None:
+            current["hex_lines"].append(hm.group(1))
+
+    if current is not None:
+        blocks.append(current)
+
+    return blocks
+
+
+def hex_lines_to_bytes(hex_lines: List[str]) -> bytes:
+    parts: List[str] = []
+    for line in hex_lines:
+        for token in line.replace("  ", " ").split():
+            if re.fullmatch(r"[0-9A-Fa-f]{2}", token):
+                parts.append(token)
+    return bytes.fromhex("".join(parts)) if parts else b""
+
+
+def parse_ipv4_packet(payload: bytes) -> Dict[str, Any]:
+    if len(payload) < 20:
+        return {}
+    ihl = (payload[0] & 0x0F) * 4
+    if len(payload) < ihl or ihl < 20:
+        return {}
+    proto_num = payload[9]
+    src = ".".join(str(b) for b in payload[12:16])
+    dst = ".".join(str(b) for b in payload[16:20])
+
+    proto_map = {1: "icmp", 6: "tcp", 17: "udp"}
+    proto = proto_map.get(proto_num, f"ipproto_{proto_num}")
+
+    out = {
+        "ip_version": 4,
+        "protocol": proto,
+        "src_ip": src,
+        "dst_ip": dst,
+    }
+
+    if proto_num in (6, 17) and len(payload) >= ihl + 4:
+        out["src_port"] = int.from_bytes(payload[ihl:ihl+2], "big")
+        out["dst_port"] = int.from_bytes(payload[ihl+2:ihl+4], "big")
+
+    return out
+
+
+def parse_ipv6_packet(payload: bytes) -> Dict[str, Any]:
+    if len(payload) < 40:
+        return {}
+    next_header = payload[6]
+    src_raw = payload[8:24]
+    dst_raw = payload[24:40]
+
+    def fmt_ipv6(buf: bytes) -> str:
+        groups = [f"{int.from_bytes(buf[i:i+2], 'big'):x}" for i in range(0, 16, 2)]
+        return ":".join(groups)
+
+    proto_map = {58: "icmpv6", 6: "tcp", 17: "udp"}
+    proto = proto_map.get(next_header, f"ipproto_{next_header}")
+
+    out = {
+        "ip_version": 6,
+        "protocol": proto,
+        "src_ip": fmt_ipv6(src_raw),
+        "dst_ip": fmt_ipv6(dst_raw),
+    }
+
+    if next_header in (6, 17) and len(payload) >= 44:
+        out["src_port"] = int.from_bytes(payload[40:42], "big")
+        out["dst_port"] = int.from_bytes(payload[42:44], "big")
+
+    return out
+
+
+def find_ipv4_offset(frame: bytes) -> Optional[int]:
+    for i in range(0, max(0, len(frame) - 20)):
+        b0 = frame[i]
+        version = b0 >> 4
+        ihl = b0 & 0x0F
+        if version == 4 and 5 <= ihl <= 15:
+            return i
+    return None
+
+
+def find_ipv6_offset(frame: bytes) -> Optional[int]:
+    for i in range(0, max(0, len(frame) - 40)):
+        if (frame[i] >> 4) == 6:
+            return i
+    return None
+
+
+def decode_packet_bytes(frame: bytes, family: str = "") -> Dict[str, Any]:
+    family = str(family or "").strip()
+
+    if family == "AF_INET6":
+        off = find_ipv6_offset(frame)
+        if off is not None:
+            decoded = parse_ipv6_packet(frame[off:])
+            decoded["ether_type"] = "ipv6"
+            decoded["decode_offset"] = off
+            return decoded
+
+    if family == "AF_INET":
+        off = find_ipv4_offset(frame)
+        if off is not None:
+            decoded = parse_ipv4_packet(frame[off:])
+            decoded["ether_type"] = "ipv4"
+            decoded["decode_offset"] = off
+            return decoded
+
+    off6 = find_ipv6_offset(frame)
+    if off6 is not None:
+        decoded = parse_ipv6_packet(frame[off6:])
+        decoded["ether_type"] = "ipv6"
+        decoded["decode_offset"] = off6
+        return decoded
+
+    off4 = find_ipv4_offset(frame)
+    if off4 is not None:
+        decoded = parse_ipv4_packet(frame[off4:])
+        decoded["ether_type"] = "ipv4"
+        decoded["decode_offset"] = off4
+        return decoded
+
+    return {}
+
+
 def extract_dns_candidates(lines: List[str]) -> List[str]:
     seen = set()
     out: List[str] = []
@@ -330,29 +484,68 @@ def extract_dns_candidates(lines: List[str]) -> List[str]:
             if item and item not in seen:
                 seen.add(item)
                 out.append(item)
-    return out
+    return out[:200]
+
+
 def extract_endpoint_candidates(lines: List[str]) -> List[str]:
-    import re
+    blocks = split_packet_blocks(lines)
     seen = set()
     out: List[str] = []
-    pattern = re.compile(r'((?:\d{1,3}\.){3}\d{1,3}(?::\d+)?)')
-    for line in lines:
-        for match in pattern.findall(line):
-            if match not in seen:
-                seen.add(match)
-                out.append(match)
-    return out
+
+    for block in blocks:
+        raw = hex_lines_to_bytes(block.get("hex_lines", []))
+        decoded = decode_packet_bytes(raw, block.get("family", ""))
+        src_ip = decoded.get("src_ip")
+        dst_ip = decoded.get("dst_ip")
+        src_port = decoded.get("src_port")
+        dst_port = decoded.get("dst_port")
+
+        candidates = []
+        if src_ip:
+            candidates.append(f"{src_ip}:{src_port}" if src_port is not None else src_ip)
+        if dst_ip:
+            candidates.append(f"{dst_ip}:{dst_port}" if dst_port is not None else dst_ip)
+
+        for item in candidates:
+            if item not in seen:
+                seen.add(item)
+                out.append(item)
+
+    return out[:200]
+
+
 def extract_protocol_candidates(lines: List[str]) -> List[str]:
+    blocks = split_packet_blocks(lines)
     seen = set()
     out: List[str] = []
-    protocols = ["tcp", "udp", "icmp", "tls", "http", "https", "dns", "quic"]
-    for line in lines:
-        low = line.lower()
-        for proto in protocols:
-            if proto in low and proto not in seen:
-                seen.add(proto)
-                out.append(proto)
-    return out
+
+    for block in blocks:
+        raw = hex_lines_to_bytes(block.get("hex_lines", []))
+        decoded = decode_packet_bytes(raw, block.get("family", ""))
+
+        for item in [
+            block.get("family", ""),
+            decoded.get("ether_type", ""),
+            decoded.get("protocol", ""),
+        ]:
+            item = str(item).strip()
+            if item and item not in seen:
+                seen.add(item)
+                out.append(item)
+
+    return out[:50]
+
+
+def summarize_process_candidates(lines: List[str]) -> List[str]:
+    blocks = split_packet_blocks(lines)
+    seen = set()
+    out: List[str] = []
+    for block in blocks:
+        proc = str(block.get("process", "")).strip()
+        if proc and proc not in seen:
+            seen.add(proc)
+            out.append(proc)
+    return out[:100]
 
 def try_capture_text(udid: str, outdir: Path, seconds: int) -> Dict[str, Any]:
     stdout_path = outdir / "capture_stdout.txt"
@@ -487,6 +680,7 @@ def main() -> int:
     dns_candidates = extract_dns_candidates(lines)
     endpoint_candidates = extract_endpoint_candidates(lines)
     protocol_candidates = extract_protocol_candidates(lines)
+    process_candidates = summarize_process_candidates(lines)
 
     stdout_info = file_info(stdout_path)
     stderr_info = file_info(stderr_path)
@@ -545,6 +739,7 @@ def main() -> int:
             "dns_candidates": dns_candidates,
             "endpoint_candidates": endpoint_candidates,
             "protocol_candidates": protocol_candidates,
+            "process_candidates": process_candidates,
         },
         "tshark_summary": {
             "ok": True,
@@ -558,6 +753,7 @@ def main() -> int:
     log(f"DNS candidates: {len(dns_candidates)}")
     log(f"Endpoint candidates: {len(endpoint_candidates)}")
     log(f"Protocol candidates: {len(protocol_candidates)}")
+    log(f"Process candidates: {len(process_candidates)}")
     log(f"Artifacts written to {outdir}")
     return 0
 

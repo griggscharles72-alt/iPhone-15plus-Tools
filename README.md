@@ -2,6 +2,29 @@ Dr. iPhone — Linux ↔ iPhone Observability Stack
 
 Overview
 
+
+Start Here
+
+Primary daily launcher:
+
+    ./dr_iphone_launcher.sh
+
+Modes:
+
+    ./dr_iphone_launcher.sh bench
+    ./dr_iphone_launcher.sh bench-plus
+
+What it does before running:
+    • activates the repo virtualenv
+    • checks required tools
+    • verifies usbmuxd is active
+    • waits for visible iPhone transport
+    • validates pairing
+    • launches the correct bench flow
+
+Use this as the default repo entrypoint instead of calling lower-level scripts manually.
+
+
 The correct approach for building a Linux ↔ iPhone tooling stack is not thinking in individual tools, but designing a layered script system.
 
 Instead of installing random utilities and manually running commands, this repository treats Python as the orchestration layer and uses a small number of helper tools that expose iOS device protocols.

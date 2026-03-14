@@ -55,14 +55,21 @@ Daily Safe Workflow
 
 The primary default entrypoint is now:
 
-    iphone_observatory.py
+    ./dr_iphone_launcher.sh
 
-Recommended daily run:
+Recommended daily runs:
 
-    ./iphone_observatory.py
+    ./dr_iphone_launcher.sh
+    ./dr_iphone_launcher.sh bench
+    ./dr_iphone_launcher.sh bench-plus
 
-This performs a safe observability pass across the stable bench layers, then
-correlates the newest artifacts into one combined report.
+This launcher:
+    • activates the repo virtualenv
+    • checks required tools
+    • verifies usbmuxd is active
+    • waits for visible iPhone transport
+    • validates pairing
+    • launches the correct observatory flow
 
 Use lower-level scripts directly only when working on a specific subsystem.
 

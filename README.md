@@ -69,6 +69,54 @@ Use lower-level scripts directly only when working on a specific subsystem.
 
 ⸻
 
+
+
+Validated Hardware Base
+
+This repository is currently validated against the following known-good bench:
+
+Host
+    • HP ENVY TE01 Linux workstation
+    • VS Code + integrated terminal workflow
+    • Local Python virtualenv at .venv
+    • usbmuxd active on the host
+    • libimobiledevice helper tools present
+    • pymobiledevice3 present
+
+Phone
+    • Device class: iPhone 15 Plus
+    • Product type: iPhone15,5
+    • iOS version: 26.1
+    • Build version: 23B85
+
+Validated Transport / Trust State
+    • USB cable connection confirmed
+    • Host-level Apple USB detection confirmed through lsusb
+    • Device visibility confirmed through idevice_id
+    • Pair validation confirmed through idevicepair validate
+    • Device info retrieval confirmed through ideviceinfo
+
+Primary Repo Entry Point
+    • ./dr_iphone_launcher.sh
+
+Validated Run Modes
+    • ./dr_iphone_launcher.sh bench
+    • ./dr_iphone_launcher.sh bench-plus
+
+Known-Good Bench Behavior
+    • launcher waits for visible iPhone transport
+    • launcher checks pairing before running collectors
+    • bench completes doctor + apps + crash + devsurf + state
+    • bench-plus completes doctor + apps + crash + devsurf + state + pcap + notify
+    • observatory artifacts are written under artifacts/iphone_observatory/
+    • operator console artifacts are written under artifacts/iphone_operator_console/
+
+Operational Notes
+    • If the phone is visible in lsusb but not visible to idevice_id, the USB transport may be present while the lockdown/pairing session is stale
+    • Strong recovery path: restart usbmuxd, clear stale lockdown cache, replug phone, unlock, trust, then revalidate pair state
+    • Do not treat desktop file-mount visibility alone as proof that the libimobiledevice stack is healthy
+    • Use the launcher as the default daily entrypoint instead of manually sequencing lower-level scripts
+
 Architecture
 
 The system is organized as layered scripts.
